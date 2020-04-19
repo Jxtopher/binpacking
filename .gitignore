@@ -1,0 +1,12 @@
+# Internal Python stuff:
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local environment
+.env
+.venv
+venv/
+
+# mypy:
+.mypy_cache/
