@@ -4,7 +4,7 @@ from binpacking.types import CoordinateType
 
 
 class Solution(List[CoordinateType]):
-    def __init__(self, size: int, initial_value: CoordinateType = (0.0, 0.0)):
+    def __init__(self, size: int, initial_value: CoordinateType = (0, 0)):
         self._fitness_is_valid = False
         self._fitness: Optional[float] = None
         for _ in range(size):
