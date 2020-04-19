@@ -1,4 +1,4 @@
-# Bin Packing
+# Bin Packing 2D
 
 Bin Packing, using optimization to solve the problem!
 
