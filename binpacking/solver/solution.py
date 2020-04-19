@@ -19,6 +19,6 @@ class Solution(List[CoordinateType]):
 
     def get_fitness(self) -> float:
         if not self._fitness_is_valid:
-            raise Exception("[-] Solution is not evaluated")
+            raise Exception('[-] Solution is not evaluated')
         assert isinstance(self._fitness, float)
         return self._fitness

@@ -37,7 +37,7 @@ class TabuSearch:
             #     print(s_prim)
             #     if 500 < cpt:
             #         print(cpt)
-            #         raise Exception ("[-] plus de voisin trouver")
+            #         raise Exception('[-] no more found neighbors')
             #     cpt += 1
 
             self.bin_packing.evaluation(s_prim)
