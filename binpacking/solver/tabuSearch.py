@@ -25,13 +25,14 @@ class TabuSearch:
             
             s_prim = self.neighbor(s_star)
             print(s_prim)
-            cpt = 0
-            while s_prim in self.taboo_list:
-                s_prim = self.neighbor(s_star)
-                print(s_prim)
-                if cpt < 500:
-                    raise Exception ("[-] plus de voisin trouver")
-                cpt += 1
+            # cpt = 0
+            # while s_prim in self.taboo_list:
+            #     s_prim = self.neighbor(s_star)
+            #     print(s_prim)
+            #     if 500 < cpt:
+            #         print(cpt)
+            #         raise Exception ("[-] plus de voisin trouver")
+            #     cpt += 1
             
             self.bin_packing.evaluation(s_prim)
 

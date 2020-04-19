@@ -19,7 +19,8 @@ from binpacking.solver.neighbor import Neighbor
 
 if __name__ == "__main__":
     bin_packing = InstanceLoader.get_bin_packing("instances/binpacking2d-5-1.json")
+    neighbor = Neighbor(bin_packing)
     sol_init = Solution(5)
 
-    ts = TabuSearch(bin_packing, 5, 300, Neighbor.random)
+    ts = TabuSearch(bin_packing, 5, 300, neighbor.random)
     print(ts.run(sol_init))
