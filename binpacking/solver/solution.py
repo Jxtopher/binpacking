@@ -1,13 +1,14 @@
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
-Coordinate = Tuple[int, int]
+from binpacking.types import CoordinateType
 
-class Solution(List[Coordinate]):
-    def __init__(self, size: int, value_initial: Coordinate = (0,0)):
+
+class Solution(List[CoordinateType]):
+    def __init__(self, size: int, initial_value: CoordinateType = (0.0, 0.0)):
         self._fitness_is_valid = False
-        self._fitness : Optional[float] = None
+        self._fitness: Optional[float] = None
         for _ in range(size):
-            self.append(value_initial)
+            self.append(initial_value)
 
     def get_fitness_is_valid(self) -> bool:
         return self._fitness_is_valid
@@ -18,6 +19,6 @@ class Solution(List[Coordinate]):
 
     def get_fitness(self) -> float:
         if not self._fitness_is_valid:
-            raise Exception ("[-] Solution n'est evaluaté")
+            raise Exception('[-] Solution is not evaluated')
         assert isinstance(self._fitness, float)
         return self._fitness

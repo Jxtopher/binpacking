@@ -303,10 +303,10 @@
 		</g>
 		<g id="shape104-118" v:mID="104" v:groupContext="shape" transform="translate(18.375,-20.5354)">
 			<title>Sheet.104</title>
-			<desc>Solution est défini par (x, y, rotation={0|90})</desc>
+			<desc>Solution is defined by (x, y, rotation={0|90})</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="256.465" cy="557.043" width="512.93" height="20"/>
 			<rect x="0" y="547.043" width="512.929" height="20" class="st9"/>
-			<text x="4" y="564.24" class="st14" v:langID="1036"><v:paragraph/><v:tabList/>Solution est défini par (x, y, rotation={0|90})</text>		</g>
+			<text x="4" y="564.24" class="st14" v:langID="1036"><v:paragraph/><v:tabList/>Solution is defined by (x, y, rotation={0|90})</text>		</g>
 	</g>
 </svg>
