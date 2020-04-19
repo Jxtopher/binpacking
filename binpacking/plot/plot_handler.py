@@ -5,6 +5,8 @@ from random import uniform
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
+from binpacking.types import CoordinateType
+
 
 class PlotHandler:
     DEFAULT_RESULTS_PATH = path.join('binpacking', 'plot', 'results')
@@ -12,7 +14,7 @@ class PlotHandler:
     BACKGROUND_COLOR = '#AAAAAA'
 
     def __init__(
-        self, capacity: Tuple[float, float], items: List[Tuple[float, float, float, float]]
+        self, capacity: CoordinateType, items: List[Tuple[CoordinateType, CoordinateType]]
     ):
         self.capacity = capacity
         self.items = items
@@ -38,7 +40,7 @@ class PlotHandler:
         )
 
         for item in self.items:
-            x0, y0, x1, y1 = item
+            (x0, y0), (x1, y1) = item
             width = x1 - x0
             height = y1 - y0
             ax.add_patch(
