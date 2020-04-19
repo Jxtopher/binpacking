@@ -3,7 +3,7 @@ from os import path
 import json
 
 from binpacking.types import InstanceType, CoordinateType
-from binpacking.solver.binPacking2D import BinPacking2D
+from binpacking.solver.bin_packing_2d import BinPacking2D
 
 
 class InstanceLoader:

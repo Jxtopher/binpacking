@@ -1,7 +1,7 @@
 from typing import Deque
 from collections import deque
 
-from binpacking.solver.binPacking2D import BinPacking2D
+from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
 from binpacking.solver.neighbor import Neighbor
 

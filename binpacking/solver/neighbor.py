@@ -1,7 +1,7 @@
 from random import uniform
 
 from binpacking.solver.solution import Solution
-from binpacking.solver.binPacking2D import BinPacking2D
+from binpacking.solver.bin_packing_2d import BinPacking2D
 
 
 class Neighbor:

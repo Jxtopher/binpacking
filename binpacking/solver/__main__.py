@@ -1,6 +1,6 @@
 from binpacking.solver.solution import Solution
-from binpacking.solver.instanceLoader import InstanceLoader
-from binpacking.solver.tabuSearch import TabuSearch
+from binpacking.solver.instance_loader import InstanceLoader
+from binpacking.solver.tabu_search import TabuSearch
 from binpacking.solver.neighbor import Neighbor
 
 
