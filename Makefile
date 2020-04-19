@@ -64,6 +64,9 @@ checks:
 plot:
 	$(PIPENV_RUN) python -m binpacking.plot
 
+run-solver:
+	$(PIPENV_RUN) python -m binpacking.solver
+
 # Running tests
 
 test: TARGET ?= discover

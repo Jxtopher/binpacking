@@ -1,17 +1,26 @@
-from typing import Tuple, List
+from typing import cast
+from os import path
 import json
 
+from binpacking.types import InstanceType, CoordinateType
 from binpacking.solver.binPacking2D import BinPacking2D
 
+
 class InstanceLoader:
-    @staticmethod 
-    def loadJson(file_path : str) -> dict:
-        with open(file_path) as f:
-            return json.loads(f.read())
+    INSTANCES_FOLDER_NAME = 'instances'
 
     @classmethod
-    def get_bin_packing(cls, file_path: str) -> BinPacking2D :
-        x = cls.loadJson(file_path)
-        items = [tuple(item) for item in x['items']]
-        b = BinPacking2D(tuple(x["capacity"]), items)
+    def loadJson(cls, filename: str) -> InstanceType:
+        file_path = path.join(cls.INSTANCES_FOLDER_NAME, filename)
+        with open(file_path) as f:
+            content = f.read()
+            return cast(InstanceType, json.loads(content))
+
+    @classmethod
+    def get_bin_packing(cls, file_path: str) -> BinPacking2D:
+        loaded_instance = cls.loadJson(file_path)
+        # not super nice to cast but JSON doesn't have tuples
+        capacity = cast(CoordinateType, tuple(loaded_instance['capacity']))
+        items = [cast(CoordinateType, tuple(item)) for item in loaded_instance['items']]
+        b = BinPacking2D(capacity, items)
         return b
