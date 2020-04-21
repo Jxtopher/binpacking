@@ -2,9 +2,8 @@ from typing import List, Optional
 
 from binpacking.types import CoordinateType
 
-
 class Solution(List[CoordinateType]):
-    def __init__(self, size: int, initial_value: CoordinateType = (0.0, 0.0)):
+    def __init__(self, size: int, initial_value: CoordinateType = (0, 0, 0)):
         self._fitness_is_valid = False
         self._fitness: Optional[float] = None
         for _ in range(size):
@@ -22,3 +21,12 @@ class Solution(List[CoordinateType]):
             raise Exception('[-] Solution is not evaluated')
         assert isinstance(self._fitness, float)
         return self._fitness
+
+    def __str__(self):
+        tmp = ""
+        for i in range(len(self)):
+            tmp += str(self[i])
+        if self.get_fitness_is_valid():
+            return str(self.get_fitness()) + " : [" + tmp + "]"
+        else:
+            return str(None) + " : [" + tmp + "]"

@@ -9,8 +9,14 @@ class BinPacking2D:
         self._capacity = capacity
         self._items = items
 
+    
+    def collision(sol: Solution, a : int, b : int) -> bool:
+        
+        return True
+
     def evaluation(self, sol: Solution) -> None:
-        # TODO: calculate the solution quality
+        # TOD calculate the solution quality
+
         sol.set_fitness(11.5)
 
     def get_capacity(self) -> CoordinateType:

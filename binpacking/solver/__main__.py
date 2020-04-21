@@ -5,10 +5,12 @@ from binpacking.solver.neighbor import Neighbor
 
 
 if __name__ == '__main__':
-    bin_packing = InstanceLoader.get_bin_packing('binpacking2d-5-1.json')
+    bin_packing = InstanceLoader.get_bin_packing('binpacking2d-6-1.json')
     neighbor = Neighbor(bin_packing)
     sol_init = Solution(5)
+    bin_packing.evaluation(sol_init)
+    print(sol_init)
 
-    ts = TabuSearch(bin_packing, 5, 300, neighbor)
-    ts.run(sol_init)
+    # ts = TabuSearch(bin_packing, 5, 300, neighbor)
+    # ts.run(sol_init)
     # TODO: the above doesn't return a value, what to print?

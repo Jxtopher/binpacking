@@ -1,11 +1,11 @@
 from typing import List, Tuple, TypedDict
 
 
-CoordinateType = Tuple[float, float]
+CoordinateType = Tuple[int, int, int]
 
 
 class InstanceType(TypedDict):
     name: str
     instance_number: str
-    capacity: List[float]
-    items: List[List[float]]
+    capacity: List[int]
+    items: List[List[int]]
