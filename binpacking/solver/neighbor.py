@@ -1,4 +1,4 @@
-from random import uniform
+from random import randint
 
 from binpacking.solver.solution import Solution
 from binpacking.solver.bin_packing_2d import BinPacking2D
@@ -14,7 +14,7 @@ class Neighbor:
             capacity = self.instance.get_capacity()
             item = self.instance.get_item(i)
             s[i] = (
-                uniform(0, capacity[0] - item[0]),
-                uniform(0, capacity[1] - item[0]),
+                randint(0, capacity[0] - item[0]),
+                randint(0, capacity[1] - item[0]),
             )
         return s

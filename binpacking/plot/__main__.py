@@ -7,12 +7,12 @@ if __name__ == '__main__':
     # TODO: needs to be based on JSON input, processed by solver,
     # and properly given to the PlotHandler
 
-    capacity = (42.0, 42.0)
+    capacity = (42, 42)
     items_to_plot = [
-        ((0.0, 0.0), (20.0, 20.0)),
-        ((20.0, 0.0), (42.0, 20.0)),
-        ((0.0, 20.0), (20.0, 42.0)),
-        ((20.0, 20.0), (42.0, 42.0)),
+        ((0, 0), (20, 20)),
+        ((20, 0), (42, 20)),
+        ((0, 20), (20, 42)),
+        ((20, 20), (42, 42)),
     ]
 
     plot_handler = PlotHandler(capacity, items_to_plot)
