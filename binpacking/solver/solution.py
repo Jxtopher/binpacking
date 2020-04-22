@@ -1,9 +1,9 @@
 from typing import List, Optional
 
-from binpacking.types import CoordinateType
+from binpacking.types import CoordinateSolutionType
 
-class Solution(List[CoordinateType]):
-    def __init__(self, size: int, initial_value: CoordinateType = (0, 0, 0)):
+class Solution(List[CoordinateSolutionType]):
+    def __init__(self, size: int, initial_value: CoordinateSolutionType = (0, 0, 0)):
         self._fitness_is_valid = False
         self._fitness: Optional[float] = None
         for _ in range(size):

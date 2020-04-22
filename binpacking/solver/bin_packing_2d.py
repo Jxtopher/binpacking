@@ -10,9 +10,14 @@ class BinPacking2D:
         self._items = items
 
     
-    def collision(sol: Solution, a : int, b : int) -> bool:
-        
-        return True
+    # collision between sqaure a and b
+    def collision(self, sol: Solution, a : int, b : int) -> bool:
+
+        # if sol[a][2] == 90:
+        #     Ax1 = self._items(a)[0]
+        # else:
+        #     Ax1 = self._items(a)[1]
+        return False
 
     def evaluation(self, sol: Solution) -> None:
         # TOD calculate the solution quality
@@ -24,3 +29,6 @@ class BinPacking2D:
 
     def get_item(self, index: int) -> CoordinateType:
         return self._items[index]
+
+    def get_instance_size(self):
+        return len(self._items)
