@@ -15,16 +15,18 @@ class PlotHandler:
 
     BACKGROUND_COLOR = '#AAAAAA'
 
-    def __init__(
-        self, capacity: CoordinateType, items: List[Tuple[CoordinateType, CoordinateType]]
-    ):
-        self.capacity = capacity
-        self.items = items
+    # def __init__(
+    #     self, capacity: CoordinateType, items: List[Tuple[CoordinateType, CoordinateType]]
+    # ):
+    #     self.capacity = capacity
+    #     self.items = items
 
-    # def __init__(self, instance : BinPacking2D, solution : Solution):
-    #     self.capacity = []
-    #     self.items = []
-    #     pass
+    def __init__(self, instance : BinPacking2D, solution : Solution):
+        self.capacity = instance.get_capacity()
+        self.items = []
+        for i in range(instance.get_instance_size()):
+            if solution[i] != None:
+                self.items.append(((solution[i][0], solution[i][1]), (solution[i][0] +instance.get_item(i)[0], solution[i][1] + instance.get_item(i)[1])))
 
     @staticmethod
     def _get_random_color() -> CoordinateSolutionType:
