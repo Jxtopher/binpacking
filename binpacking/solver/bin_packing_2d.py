@@ -12,13 +12,28 @@ class BinPacking2D:
     
     # collision between sqaure a and b
     def collision(self, sol: Solution, a : int, b : int) -> bool:
+        print("=")
+        X : int = 0
+        Y : int = 1
 
-        # if sol[a][2] == 90:
-        #     Ax1 = self._items(a)[0]
-        # else:
-        #     Ax1 = self._items(a)[1]
+        if sol[b][X] - sol[a][X] < 0 :
+            tmp = a
+            a = b
+            b = tmp
+
+        if sol[a][2] != 90:
+            Ax1 = self._items[a][0]
+            Ay1 = self._items[a][0]
+        else:
+            Ax1 = self._items[a][1]
+            Ay1 = self._items[a][1]
+
+        print(sol[b][X] - sol[a][X])
+        print(sol[b][Y] - sol[a][Y])
+        if sol[b][X] - sol[a][X] < Ax1 and sol[b][Y] - sol[a][Y] < Ay1:
+            return True
+        
         return False
-
     def evaluation(self, sol: Solution) -> None:
         # TOD calculate the solution quality
 

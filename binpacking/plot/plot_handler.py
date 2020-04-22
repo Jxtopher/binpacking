@@ -5,7 +5,9 @@ from random import uniform
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-from binpacking.types import CoordinateType
+from binpacking.types import CoordinateType, CoordinateSolutionType
+from binpacking.solver.solution import Solution
+from binpacking.solver.bin_packing_2d import BinPacking2D
 
 
 class PlotHandler:
@@ -19,8 +21,13 @@ class PlotHandler:
         self.capacity = capacity
         self.items = items
 
+    # def __init__(self, instance : BinPacking2D, solution : Solution):
+    #     self.capacity = []
+    #     self.items = []
+    #     pass
+
     @staticmethod
-    def _get_random_color() -> Tuple[float, float, float]:
+    def _get_random_color() -> CoordinateSolutionType:
         return (uniform(0, 1), uniform(0, 1), uniform(0, 1))
 
     def _process(self) -> Any:
