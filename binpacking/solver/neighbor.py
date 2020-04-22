@@ -1,4 +1,5 @@
 from random import randint, uniform
+import copy
 
 from binpacking.solver.solution import Solution
 from binpacking.solver.bin_packing_2d import BinPacking2D
@@ -9,7 +10,7 @@ class Neighbor:
         self.instance = instance
 
     def random(self, sol: Solution) -> Solution:
-        s = sol
+        s = copy.deepcopy(sol)
         for i in range(len(s)):
             capacity = self.instance.get_capacity()
             item = self.instance.get_item(i)

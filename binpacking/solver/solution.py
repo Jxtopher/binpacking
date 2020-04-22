@@ -1,4 +1,5 @@
 from typing import List, Optional
+from copy import copy, deepcopy
 
 from binpacking.types import CoordinateSolutionType
 
@@ -8,6 +9,20 @@ class Solution(List[CoordinateSolutionType]):
         self._fitness: Optional[float] = None
         for _ in range(size):
             self.append(initial_value)
+
+    # def __init__(self, size: int, lxx : List[CoordinateSolutionType], fitness_is_valid, fitness):
+    #     self._fitness_is_valid = fitness_is_valid
+    #     self._fitness: Optional[float] = fitness
+
+
+    # def __deepcopy__(self, memo):
+    #     # print(len(self))
+    #     return Solution(5)
+
+    # def __deepcopy__(self, memo):
+    #     cls = self.__class__
+    #     result = cls.__new__(cls)
+    #     return result
 
     def get_fitness_is_valid(self) -> bool:
         return self._fitness_is_valid

@@ -23,9 +23,9 @@ class TabuSearch:
 
     def run(self, sol: Solution) -> Solution:
         # Best known solution
-        s_star = sol.copy()
-        # if not s_star.get_fitness_is_valid():
-        self.bin_packing.evaluation(s_star)
+        s_star = copy.deepcopy(sol)
+        if not s_star.get_fitness_is_valid():
+            self.bin_packing.evaluation(s_star)
 
         iterations = 0
         # while the stop criteria isn't reached
@@ -45,15 +45,9 @@ class TabuSearch:
             print(s_prim)
             # mimi ou maximi
             if s_star.get_fitness() < s_prim.get_fitness():
-                print(str(s_star.get_fitness()) + "<" +str(s_prim.get_fitness()))
-                s_star = s_prim.copy()
+                s_star = copy.deepcopy(s_prim)
 
             self.taboo_list.append(s_prim)
 
             iterations += 1
         return s_star
-        # s*
-        # Take a non-taboo neighbor solution
-        # Evaluate solution s'
-        # Take best solution s* < s' : s* = s'
-        # Set taboo as the considered solution s'
