@@ -26,7 +26,10 @@ class PlotHandler:
         self.items = []
         for i in range(instance.get_instance_size()):
             if solution[i] != None:
-                self.items.append(((solution[i][0], solution[i][1]), (solution[i][0] +instance.get_item(i)[0], solution[i][1] + instance.get_item(i)[1])))
+                if solution[i][2] == 0:
+                    self.items.append(((solution[i][0], solution[i][1]), (solution[i][0] +instance.get_item(i)[0], solution[i][1] + instance.get_item(i)[1])))
+                elif solution[i][2] == 90:
+                    self.items.append(((solution[i][0], solution[i][1]), (solution[i][0] +instance.get_item(i)[1], solution[i][1] + instance.get_item(i)[0])))
 
     @staticmethod
     def _get_random_color() -> CoordinateSolutionType:
