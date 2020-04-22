@@ -36,6 +36,36 @@ class BinPacking2DTest(TestCase):
         solution[0] = [2,0,0]
         solution[1] = [0,2,0]
         self.assertEqual(instance.collision(solution, 0, 1), False)
+
+
+    def test_outside(self) -> None:
+        instance = BinPacking2D([100,100], [[6,6]])
+        solution = Solution(instance.get_instance_size())
+        solution[0] = [0,0,0]
+        self.assertEqual(instance.outside(solution, 0), False)
+
+        solution[0] = [100,0,0]
+        self.assertEqual(instance.outside(solution, 0), True)
+
+
+        solution[0] = [99,99,0]
+        self.assertEqual(instance.outside(solution, 0), True)
+
+        solution[0] = [93,93,0]
+        self.assertEqual(instance.outside(solution, 0), False)
+
+
     def test_evaluation(self) -> None:
-        # TODO: proper tests!
+        instance = BinPacking2D([100,100], [[1,1], [1, 1], [1, 1], [1, 1]])
+        solution = Solution(instance.get_instance_size())
+        
+
+        solution[0] = [0,0,0]
+        solution[1] = [1,1,0]
+        solution[2] = [2,2,0]
+        solution[3] = [3,3,0]
+        
+        instance.evaluation(solution)
+        print(solution.get_fitness())
+
         self.assertEqual('foo'.upper(), 'FOO')

@@ -11,6 +11,8 @@ if __name__ == '__main__':
     bin_packing.evaluation(sol_init)
     print(sol_init)
 
-    # ts = TabuSearch(bin_packing, 5, 300, neighbor)
-    # ts.run(sol_init)
+    ts = TabuSearch(bin_packing, 5, 300, neighbor)
+    s_star = ts.run(sol_init)
+    print("best solution")
+    print(s_star)
     # TODO: the above doesn't return a value, what to print?

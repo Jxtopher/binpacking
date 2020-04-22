@@ -25,7 +25,7 @@ class Solution(List[CoordinateSolutionType]):
     def __str__(self):
         tmp = ""
         for i in range(len(self)):
-            tmp += str(self[i])
+            tmp += str(self[i]) + ", "
         if self.get_fitness_is_valid():
             return str(self.get_fitness()) + " : [" + tmp + "]"
         else:
