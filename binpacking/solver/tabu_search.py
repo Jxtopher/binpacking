@@ -23,7 +23,7 @@ class TabuSearch:
 
     def run(self, sol: Solution) -> Solution:
         # Best known solution
-        s_star = copy.deepcopy(sol)
+        s_star = sol.copy()
         # if not s_star.get_fitness_is_valid():
         self.bin_packing.evaluation(s_star)
 
@@ -46,7 +46,7 @@ class TabuSearch:
             # mimi ou maximi
             if s_star.get_fitness() < s_prim.get_fitness():
                 print(str(s_star.get_fitness()) + "<" +str(s_prim.get_fitness()))
-                s_star = copy.deepcopy(s_prim)
+                s_star = s_prim.copy()
 
             self.taboo_list.append(s_prim)
 
