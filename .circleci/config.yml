@@ -4,7 +4,7 @@ orbs:
   python: circleci/python@0.2.1
 
   jobs:
-    build-checks-test:
+    build:
       working_directory: ~/circleci-binpacking
       docker:
         # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
@@ -54,6 +54,6 @@ orbs:
 
 workflows:
   version: 2
-  build-checks-test:
+  build:
     jobs:
-      - build-checks-test
+      - build
