@@ -5,11 +5,11 @@ from binpacking.solver.solution import Solution
 from binpacking.solver.bin_packing_2d import BinPacking2D
 
 
-class Neighbor:
+class Neighborhood:
     def __init__(self, instance: BinPacking2D):
         self.instance = instance
 
-    def random(self, sol: Solution) -> Solution:
+    def find_random_neighbor(self, sol: Solution) -> Solution:
         s = copy.deepcopy(sol)
         for i in range(len(s)):
             capacity = self.instance.get_capacity()

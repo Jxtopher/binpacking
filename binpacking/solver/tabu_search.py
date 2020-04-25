@@ -4,7 +4,7 @@ import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
-from binpacking.solver.neighbor import Neighbor
+from binpacking.solver.neighborhood import Neighborhood
 
 
 class TabuSearch:
@@ -13,12 +13,12 @@ class TabuSearch:
         bin_packing: BinPacking2D,
         taboo_list_size: int,
         max_iterations: int,
-        neighbor: Neighbor,
+        neighborhood: Neighborhood,
     ):
         self.bin_packing = bin_packing
         self.taboo_list_size = taboo_list_size
         self.max_iterations = max_iterations
-        self.neighbor = neighbor
+        self.neighborhood = neighborhood
         self.taboo_list: Deque[Solution] = deque(maxlen=self.taboo_list_size)
 
     def run(self, sol: Solution) -> Solution:
@@ -30,11 +30,11 @@ class TabuSearch:
         iterations = 0
         # while the stop criteria isn't reached
         while iterations < self.max_iterations:
-            s_prim = self.neighbor.random(s_star)
+            s_prim = self.neighborhood.find_random_neighbor(s_star)
 
             # cpt = 0
             # while s_prim in self.taboo_list:
-            #     s_prim = self.neighbor(s_star)
+            #     s_prim = self.neighborhood(s_star)
             #     print(s_prim)
             #     if 500 < cpt:
             #         print(cpt)
