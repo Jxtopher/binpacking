@@ -21,5 +21,5 @@ class Neighborhood:
                     randint(0, 1) * 90,  # Rotation
                 )
             else:
-                s[i] = None
+                s.set_coordinate_as_invalid(i)
         return s

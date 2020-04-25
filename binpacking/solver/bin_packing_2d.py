@@ -11,22 +11,20 @@ class BinPacking2D:
 
     # collision between sqaure a and b
     def collision(self, sol: Solution, a: int, b: int) -> bool:
-        X: int = 0
-        Y: int = 1
+        x: int = 0
+        y: int = 1
 
-        if sol[b][X] - sol[a][X] < 0:
-            tmp = a
-            a = b
-            b = tmp
+        if sol[b][x] - sol[a][x] < 0:
+            a, b = b, a
 
         if sol[a][2] != 90:
-            Ax1 = self._items[a][0]
-            Ay1 = self._items[a][0]
+            ax1 = self._items[a][0]
+            ay1 = self._items[a][0]
         else:
-            Ax1 = self._items[a][1]
-            Ay1 = self._items[a][1]
+            ax1 = self._items[a][1]
+            ay1 = self._items[a][1]
 
-        if sol[b][X] - sol[a][X] < Ax1 and sol[b][Y] - sol[a][Y] < Ay1:
+        if sol[b][x] - sol[a][x] < ax1 and sol[b][y] - sol[a][y] < ay1:
             return True
 
         return False
@@ -80,52 +78,50 @@ class BinPacking2D:
     #         return False
 
     def outside(self, sol: Solution, a: int) -> bool:
-        X: int = 0
-        Y: int = 1
+        x: int = 0
+        y: int = 1
 
         if sol[a][2] != 90:
-            Ax1 = sol[a][X] + self._items[a][0]
-            Ay1 = sol[a][Y] + self._items[a][0]
+            ax1 = sol[a][x] + self._items[a][0]
+            ay1 = sol[a][y] + self._items[a][0]
         else:
-            Ax1 = sol[a][X] + self._items[a][1]
-            Ay1 = sol[a][Y] + self._items[a][1]
+            ax1 = sol[a][x] + self._items[a][1]
+            ay1 = sol[a][y] + self._items[a][1]
         if (
-            0 <= sol[a][X]
-            and Ax1 <= self._capacity[X]
-            and 0 <= sol[a][Y]
-            and Ay1 <= self._capacity[Y]
+            0 <= sol[a][x]
+            and ax1 <= self._capacity[x]
+            and 0 <= sol[a][y]
+            and ay1 <= self._capacity[y]
         ):
             return False
         else:
             return True
 
     def evaluation(self, sol: Solution) -> None:
-        # Chercher l'ensemble des objets en collision
-        nbCollision: float = 0.0
+        # Find number of collisions
+        num_collisions: int = 0
         for i in range(len(sol)):
             for j in range(i + 1, len(sol)):
-                if sol[i] is not None and sol[j] is not None:
+                if sol.is_valid_coordinate(i) and sol.is_valid_coordinate(j):
                     if self.collision(sol, i, j):
-                        nbCollision -= 1
+                        num_collisions += 1
 
-        # Chercher l'ensemble des objets qui depasse de la boîte
-        nbOutside: float = 0
+        # Find number of rectangles that are outside
+        num_outside: int = 0
         for i in range(len(sol)):
-            if sol[i] is not None:
+            if sol.is_valid_coordinate(i):
                 if self.outside(sol, i):
-                    nbOutside -= 1
+                    num_outside += 1
 
-        if nbCollision < 0:
-            sol.set_fitness(nbCollision + nbOutside)
-            return None
+        if num_collisions > 0:
+            sol.set_fitness(-float(num_collisions + num_outside))
+        else:
+            num_valid_squares: int = 0
+            for i in range(len(sol)):
+                if sol.is_valid_coordinate(i):
+                    num_valid_squares += 1
 
-        #
-        nbSquareValide: float = 0.0
-        for i in range(len(sol)):
-            if sol[i] is not None:
-                nbSquareValide += 1
-
-        sol.set_fitness(nbSquareValide)
+            sol.set_fitness(float(num_valid_squares))
 
     def get_capacity(self) -> CoordinateType:
         return self._capacity

@@ -11,15 +11,15 @@ class TabuSearch:
     def __init__(
         self,
         bin_packing: BinPacking2D,
-        taboo_list_size: int,
+        tabu_size: int,
         max_iterations: int,
         neighborhood: Neighborhood,
     ):
         self.bin_packing = bin_packing
-        self.taboo_list_size = taboo_list_size
+        self.tabu_size = tabu_size
         self.max_iterations = max_iterations
         self.neighborhood = neighborhood
-        self.taboo_list: Deque[Solution] = deque(maxlen=self.taboo_list_size)
+        self.tabu_deque: Deque[Solution] = deque(maxlen=self.tabu_size)
 
     def run(self, sol: Solution) -> Solution:
         # Best known solution
@@ -33,7 +33,7 @@ class TabuSearch:
             s_prim = self.neighborhood.find_random_neighbor(s_star)
 
             # cpt = 0
-            # while s_prim in self.taboo_list:
+            # while s_prim in self.tabu_deque:
             #     s_prim = self.neighborhood(s_star)
             #     print(s_prim)
             #     if 500 < cpt:
@@ -47,7 +47,7 @@ class TabuSearch:
             if s_star.get_fitness() < s_prim.get_fitness():
                 s_star = copy.deepcopy(s_prim)
 
-            self.taboo_list.append(s_prim)
+            self.tabu_deque.append(s_prim)
 
             iterations += 1
         return s_star

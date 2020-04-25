@@ -3,8 +3,10 @@ from typing import List, Optional
 from binpacking.types import CoordinateSolutionType
 
 
-class Solution(List[Optional[CoordinateSolutionType]]):
-    def __init__(self, size: int, initial_value: CoordinateSolutionType = (0, 0, 0)):
+class Solution(List[CoordinateSolutionType]):
+    INVALID_COORDINATE = (-1, -1, 0)
+
+    def __init__(self, size: int, initial_value: CoordinateSolutionType = INVALID_COORDINATE):
         self._fitness_is_valid = False
         self._fitness: Optional[float] = None
         for _ in range(size):
@@ -22,6 +24,12 @@ class Solution(List[Optional[CoordinateSolutionType]]):
             raise Exception('[-] Solution is not evaluated')
         assert isinstance(self._fitness, float)
         return self._fitness
+
+    def set_coordinate_as_invalid(self, index: int) -> None:
+        self[index] = self.INVALID_COORDINATE
+
+    def is_valid_coordinate(self, index: int) -> bool:
+        return self[index] != self.INVALID_COORDINATE
 
     def __str__(self) -> str:
         tmp = ''

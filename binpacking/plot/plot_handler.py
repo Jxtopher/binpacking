@@ -18,7 +18,7 @@ class PlotHandler:
         self.capacity = instance.get_capacity()
         self.items = []
         for i in range(instance.get_instance_size()):
-            if solution[i] is not None:
+            if solution.is_valid_coordinate(i):
                 if solution[i][2] == 0:
                     self.items.append(
                         (

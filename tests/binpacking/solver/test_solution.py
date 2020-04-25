@@ -21,7 +21,7 @@ class SolutionTest(TestCase):
     def test_fitness_is_valid(self) -> None:
         size: int = 3
         solution = Solution(size)
-        self.assertEqual(solution.get_fitness_is_valid(), False)
+        self.assertFalse(solution.get_fitness_is_valid())
         fitness: float = 42.42
         solution.set_fitness(fitness)
-        self.assertEqual(solution.get_fitness_is_valid(), True)
+        self.assertTrue(solution.get_fitness_is_valid())
