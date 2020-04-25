@@ -1,9 +1,12 @@
-from typing import List, Tuple, Any
+from typing import Tuple, Any
 from os import path
 from random import uniform
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+
+from binpacking.solver.solution import Solution
+from binpacking.solver.bin_packing_2d import BinPacking2D
 
 
 class PlotHandler:
@@ -11,11 +14,33 @@ class PlotHandler:
 
     BACKGROUND_COLOR = '#AAAAAA'
 
-    def __init__(
-        self, capacity: Tuple[float, float], items: List[Tuple[float, float, float, float]]
-    ):
-        self.capacity = capacity
-        self.items = items
+    def __init__(self, instance: BinPacking2D, solution: Solution):
+        self.capacity = instance.get_capacity()
+        self.items = []
+        for i in range(instance.get_instance_size()):
+            if solution.is_valid_coordinate(i):
+                if solution[i][2] == 0:
+                    self.items.append(
+                        (
+                            (solution[i][0], solution[i][1]),
+                            (
+                                solution[i][0] + instance.get_item(i)[0],
+                                solution[i][1] + instance.get_item(i)[1],
+                            ),
+                        )
+                    )
+                elif solution[i][2] == 90:
+                    self.items.append(
+                        (
+                            (solution[i][0], solution[i][1]),
+                            (
+                                solution[i][0] + instance.get_item(i)[1],
+                                solution[i][1] + instance.get_item(i)[0],
+                            ),
+                        )
+                    )
+                else:
+                    raise ValueError(f'Invalid rotation value {solution[i][2]}')
 
     @staticmethod
     def _get_random_color() -> Tuple[float, float, float]:
@@ -38,7 +63,7 @@ class PlotHandler:
         )
 
         for item in self.items:
-            x0, y0, x1, y1 = item
+            (x0, y0), (x1, y1) = item
             width = x1 - x0
             height = y1 - y0
             ax.add_patch(
