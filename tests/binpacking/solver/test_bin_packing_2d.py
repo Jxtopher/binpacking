@@ -2,10 +2,11 @@ from unittest import TestCase
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
+from binpacking.plot.plot_handler import PlotHandler
 
 class BinPacking2DTest(TestCase):
     def test_collision(self) -> None:
-        instance = BinPacking2D([100,100], [[6,6], [2, 2]])
+        instance = BinPacking2D([10,10], [[6,6], [2, 2]])
         solution = Solution(instance.get_instance_size())
         self.assertEqual(instance.collision(solution, 0, 1), True)
 
@@ -27,7 +28,9 @@ class BinPacking2DTest(TestCase):
 
         solution[0] = [2,0,0]
         solution[1] = [1,2,0]
-        self.assertEqual(instance.collision(solution, 0, 1), True)
+        plot_handler = PlotHandler(instance, solution)
+        results_filepath = plot_handler.save_to_file('test_1.png')
+        # self.assertEqual(instance.collision(solution, 0, 1), True)
 
         solution[0] = [2,0,0]
         solution[1] = [0,2,0]
