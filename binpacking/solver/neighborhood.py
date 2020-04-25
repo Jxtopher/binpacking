@@ -23,3 +23,20 @@ class Neighborhood:
             else:
                 s.set_coordinate_as_invalid(i)
         return s
+
+    def one_case_mutation(self, sol: Solution) -> Solution:
+        s = copy.deepcopy(sol)
+
+        if random() < 0.5:
+            index = randint(0, len(s))
+            capacity = self.instance.get_capacity()
+            item = self.instance.get_item(index)
+            s[index] = (
+                randint(0, capacity[0] - item[0]),  # x
+                randint(0, capacity[1] - item[0]),  # y
+                randint(0, 1) * 90,  # Rotation
+            )
+        else:
+            s.set_coordinate_as_invalid(index)
+
+        return s
