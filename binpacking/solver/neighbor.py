@@ -1,4 +1,4 @@
-from random import randint, uniform
+from random import randint, random
 import copy
 
 from binpacking.solver.solution import Solution
@@ -14,11 +14,11 @@ class Neighbor:
         for i in range(len(s)):
             capacity = self.instance.get_capacity()
             item = self.instance.get_item(i)
-            if uniform(0,1) < 0.5:
+            if random() < 0.5:
                 s[i] = (
                     randint(0, capacity[0] - item[0]),  # x
                     randint(0, capacity[1] - item[0]),  # y
-                    randint(0, 1) * 90,                 # Rotation
+                    randint(0, 1) * 90,  # Rotation
                 )
             else:
                 s[i] = None

@@ -31,7 +31,7 @@ class TabuSearch:
         # while the stop criteria isn't reached
         while iterations < self.max_iterations:
             s_prim = self.neighbor.random(s_star)
-            
+
             # cpt = 0
             # while s_prim in self.taboo_list:
             #     s_prim = self.neighbor(s_star)

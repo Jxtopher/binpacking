@@ -1,11 +1,10 @@
-from typing import List, Tuple, Any
+from typing import Tuple, Any
 from os import path
 from random import uniform
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-from binpacking.types import CoordinateType, CoordinateSolutionType
 from binpacking.solver.solution import Solution
 from binpacking.solver.bin_packing_2d import BinPacking2D
 
@@ -15,24 +14,36 @@ class PlotHandler:
 
     BACKGROUND_COLOR = '#AAAAAA'
 
-    # def __init__(
-    #     self, capacity: CoordinateType, items: List[Tuple[CoordinateType, CoordinateType]]
-    # ):
-    #     self.capacity = capacity
-    #     self.items = items
-
-    def __init__(self, instance : BinPacking2D, solution : Solution):
+    def __init__(self, instance: BinPacking2D, solution: Solution):
         self.capacity = instance.get_capacity()
         self.items = []
         for i in range(instance.get_instance_size()):
-            if solution[i] != None:
+            if solution[i] is not None:
                 if solution[i][2] == 0:
-                    self.items.append(((solution[i][0], solution[i][1]), (solution[i][0] +instance.get_item(i)[0], solution[i][1] + instance.get_item(i)[1])))
+                    self.items.append(
+                        (
+                            (solution[i][0], solution[i][1]),
+                            (
+                                solution[i][0] + instance.get_item(i)[0],
+                                solution[i][1] + instance.get_item(i)[1],
+                            ),
+                        )
+                    )
                 elif solution[i][2] == 90:
-                    self.items.append(((solution[i][0], solution[i][1]), (solution[i][0] +instance.get_item(i)[1], solution[i][1] + instance.get_item(i)[0])))
+                    self.items.append(
+                        (
+                            (solution[i][0], solution[i][1]),
+                            (
+                                solution[i][0] + instance.get_item(i)[1],
+                                solution[i][1] + instance.get_item(i)[0],
+                            ),
+                        )
+                    )
+                else:
+                    raise ValueError(f'Invalid rotation value {solution[i][2]}')
 
     @staticmethod
-    def _get_random_color() -> CoordinateSolutionType:
+    def _get_random_color() -> Tuple[float, float, float]:
         return (uniform(0, 1), uniform(0, 1), uniform(0, 1))
 
     def _process(self) -> Any:

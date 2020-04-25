@@ -14,9 +14,8 @@ if __name__ == '__main__':
 
     ts = TabuSearch(bin_packing, 5, 300, neighbor)
     s_star = ts.run(sol_init)
-    print("best solution")
+    print('best solution')
     print(s_star)
 
-    # TODO: the above doesn't return a value, what to print?
     plot_handler = PlotHandler(bin_packing, s_star)
     results_filepath = plot_handler.save_to_file('cool_plot.png')
