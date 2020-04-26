@@ -1,25 +1,25 @@
-from unittest import TestCase
+from tests.base import BaseTestCase
 
 from binpacking.solver.solution import Solution
 
 
-class SolutionTest(TestCase):
+class SolutionTest(BaseTestCase):
     def test_solution_size(self) -> None:
-        size: int = 3
-        solution = Solution(size)
-        self.assertEqual(len(solution), size)
+        expected_size: int = 3
+        sol = Solution(expected_size)
+        self.assertEqual(len(sol), expected_size)
 
     def test_fitness_getter_setter(self) -> None:
         size: int = 3
-        solution = Solution(size)
+        sol = Solution(size)
         fitness: float = 42.42
-        solution.set_fitness(fitness)
-        self.assertEqual(solution.get_fitness(), fitness)
+        sol.set_fitness(fitness)
+        self.assertEqual(sol.get_fitness(), fitness)
 
     def test_solution_validation_with_valid_fitness(self) -> None:
         size: int = 3
-        solution = Solution(size)
-        self.assertFalse(solution.has_valid_fitness())
+        sol = Solution(size)
+        self.assertFalse(sol.has_valid_fitness())
         fitness: float = 42.42
-        solution.set_fitness(fitness)
-        self.assertTrue(solution.has_valid_fitness())
+        sol.set_fitness(fitness)
+        self.assertTrue(sol.has_valid_fitness())

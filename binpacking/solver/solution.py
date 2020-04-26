@@ -1,14 +1,40 @@
 from typing import List, Optional
 
-from binpacking.types import CoordinateSolutionType
+
+class Coordinate:
+    INVALID_COORDINATE = (-1, -1)
+
+    def __init__(self, x: int, y: int):
+        self._x = x
+        self._y = y
+        self.is_rotated = False
+
+    @property
+    def x(self) -> int:
+        return self._y if self.is_rotated else self._x
+
+    @property
+    def y(self) -> int:
+        return self._x if self.is_rotated else self._y
+
+    def is_valid(self) -> bool:
+        return (self._x, self._y) != self.INVALID_COORDINATE
+
+    def invalidate(self) -> None:
+        self.is_rotated = False
+        self._x, self._y = self.INVALID_COORDINATE
+
+    def rotate(self) -> None:
+        self.is_rotated = not self.is_rotated
 
 
-class Solution(List[CoordinateSolutionType]):
-    INVALID_COORDINATE = (-1, -1, 0)
-
-    def __init__(self, size: int, initial_value: CoordinateSolutionType = INVALID_COORDINATE):
+class Solution(List[Coordinate]):
+    def __init__(self, size: int, initial_value: Optional[Coordinate] = None):
         self.fitness_is_valid = False
         self.fitness: Optional[float] = None
+
+        if initial_value is None:
+            initial_value = Coordinate(*Coordinate.INVALID_COORDINATE)
         for _ in range(size):
             self.append(initial_value)
 
@@ -30,7 +56,4 @@ class Solution(List[CoordinateSolutionType]):
         return self.fitness_is_valid
 
     def set_coordinate_as_invalid(self, index: int) -> None:
-        self[index] = self.INVALID_COORDINATE
-
-    def is_valid_coordinate(self, index: int) -> bool:
-        return self[index] != self.INVALID_COORDINATE
+        self[index].invalidate()
