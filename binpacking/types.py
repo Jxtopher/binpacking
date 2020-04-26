@@ -1,8 +1,4 @@
-from typing import List, Tuple, TypedDict
-
-
-CoordinateType = Tuple[int, int]
-CoordinateSolutionType = Tuple[int, int, int]
+from typing import List, TypedDict
 
 
 class InstanceType(TypedDict):

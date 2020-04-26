@@ -1,4 +1,4 @@
-from typing import Tuple, Any
+from typing import List, Tuple, Any
 from os import path
 from random import uniform
 
@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 from binpacking.solver.solution import Solution
-from binpacking.solver.bin_packing_2d import BinPacking2D
+from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 
 
 class PlotHandler:
@@ -14,33 +14,20 @@ class PlotHandler:
 
     BACKGROUND_COLOR = '#AAAAAA'
 
-    def __init__(self, instance: BinPacking2D, solution: Solution):
+    def __init__(self, instance: BinPacking2D, sol: Solution):
         self.capacity = instance.get_capacity()
-        self.items = []
-        for i in range(instance.get_instance_size()):
-            if solution.is_valid_coordinate(i):
-                if solution[i][2] == 0:
-                    self.items.append(
-                        (
-                            (solution[i][0], solution[i][1]),
-                            (
-                                solution[i][0] + instance.get_item(i)[0],
-                                solution[i][1] + instance.get_item(i)[1],
-                            ),
-                        )
+        self.items: List[Tuple[int, int, Rectangle]] = []
+
+        for i, coordinate in enumerate(sol):
+            if coordinate.is_valid():
+                item = instance.get_item(i)
+                self.items.append(
+                    (
+                        coordinate.x,
+                        coordinate.y,
+                        Rectangle(coordinate.x + item.width, coordinate.y + item.height),
                     )
-                elif solution[i][2] == 90:
-                    self.items.append(
-                        (
-                            (solution[i][0], solution[i][1]),
-                            (
-                                solution[i][0] + instance.get_item(i)[1],
-                                solution[i][1] + instance.get_item(i)[0],
-                            ),
-                        )
-                    )
-                else:
-                    raise ValueError(f'Invalid rotation value {solution[i][2]}')
+                )
 
     @staticmethod
     def _get_random_color() -> Tuple[float, float, float]:
@@ -50,25 +37,24 @@ class PlotHandler:
         figure = plt.figure()
         ax = figure.add_subplot(111, aspect='equal')
 
-        capacity_x1 = self.capacity[0]
-        capacity_y1 = self.capacity[1]
-        capacity_width = capacity_x1 - 0
-        capacity_height = capacity_y1 - 0
-
-        plt.xlim((0, capacity_x1))
-        plt.ylim((0, capacity_y1))
+        plt.xlim((0, self.capacity.width))
+        plt.ylim((0, self.capacity.height))
 
         ax.add_patch(
-            patches.Rectangle((0, 0), capacity_width, capacity_height, color=self.BACKGROUND_COLOR)
+            patches.Rectangle(
+                (0, 0), self.capacity.width, self.capacity.height, color=self.BACKGROUND_COLOR
+            )
         )
 
         for item in self.items:
-            (x0, y0), (x1, y1) = item
-            width = x1 - x0
-            height = y1 - y0
+            x, y, rectangle = item
             ax.add_patch(
                 patches.Rectangle(
-                    (x0, y0), width, height, linewidth=1, color=self._get_random_color()
+                    (x, y),
+                    rectangle.width,
+                    rectangle.height,
+                    linewidth=1,
+                    color=self._get_random_color(),
                 )
             )
 

@@ -1,133 +1,90 @@
 from typing import List
 
-from binpacking.types import CoordinateType
-from binpacking.solver.solution import Solution
+from binpacking.solver.solution import Solution, Coordinate
+
+
+class Rectangle:
+    def __init__(self, width: int, height: int):
+        self.width = width
+        self.height = height
 
 
 class BinPacking2D:
-    def __init__(self, capacity: CoordinateType, items: List[CoordinateType]):
-        self._capacity = capacity
-        self._items = items
+    def __init__(self, capacity: Rectangle, items: List[Rectangle]):
+        self.capacity = capacity
+        self.items = items
 
-    # collision between sqaure a and b
-    def collision(self, sol: Solution, a: int, b: int) -> bool:
-        x: int = 0
-        y: int = 1
+    def get_capacity(self) -> Rectangle:
+        return self.capacity
 
-        if sol[b][x] - sol[a][x] < 0:
-            a, b = b, a
+    def get_item(self, index: int) -> Rectangle:
+        return self.items[index]
 
-        if sol[a][2] != 90:
-            ax1 = self._items[a][0]
-            ay1 = self._items[a][0]
-        else:
-            ax1 = self._items[a][1]
-            ay1 = self._items[a][1]
+    def get_instance_size(self) -> int:
+        return len(self.items)
 
-        if sol[b][x] - sol[a][x] < ax1 and sol[b][y] - sol[a][y] < ay1:
-            return True
+    def has_collision(
+        self,
+        coordinate_a: Coordinate,
+        item_a: Rectangle,
+        coordinate_b: Coordinate,
+        item_b: Rectangle,
+    ) -> bool:
+        angles_a = [
+            (coordinate_a.x, coordinate_a.y),
+            (coordinate_a.x + item_a.width, coordinate_a.y),
+            (coordinate_a.x, coordinate_a.y + item_a.height),
+            (coordinate_a.x + item_a.width, coordinate_a.y + item_a.height),
+        ]
+        angles_b = [
+            (coordinate_b.x, coordinate_b.y),
+            (coordinate_b.x + item_b.width, coordinate_b.y),
+            (coordinate_b.x, coordinate_b.y + item_b.height),
+            (coordinate_b.x + item_b.width, coordinate_b.y + item_b.height),
+        ]
+        angles = angles_a + angles_b
+        num_angles_a = len(angles_a)
+
+        for i, (x, y) in enumerate(angles):
+            opposite_coordinate = coordinate_b if i < num_angles_a else coordinate_a
+            opposite_item = item_b if i < num_angles_a else item_a
+            if (
+                opposite_coordinate.x < x < opposite_coordinate.x + opposite_item.width
+                and opposite_coordinate.y < y < opposite_coordinate.y + opposite_item.height
+            ):
+                return True
 
         return False
 
-    # def collision(self, sol: Solution, a : int, b : int) -> bool:
+    def is_inside(self, coordinate: Coordinate, item: Rectangle) -> bool:
+        return (
+            0 <= coordinate.x
+            and coordinate.x + item.width <= self.capacity.width
+            and 0 <= coordinate.y
+            and coordinate.y + item.height <= self.capacity.height
+        )
 
-    #     X : int = 0
-    #     Y : int = 1
-
-    #     if sol[a][2] != 90:
-    #         Ax1 = self._items[a][0]
-    #         Ay1 = self._items[a][0]
-    #     else:
-    #         Ax1 = self._items[a][1]
-    #         Ay1 = self._items[a][1]
-
-    #     if sol[b][2] != 90:
-    #         Bx1 = self._items[a][0]
-    #         By1 = self._items[a][0]
-    #     else:
-    #         Bx1 = self._items[a][1]
-    #         By1 = self._items[a][1]
-
-    #     a = sol[a][X]
-    #     b = sol[a][Y]
-    #     c = sol[a][X] + Ax1
-    #     d = sol[a][Y]
-    #     e = sol[a][X]
-    #     f = sol[a][Y] + Ay1
-    #     g = sol[a][X] + Ax1
-    #     h = sol[a][Y] + Ay1
-
-    #     i = sol[b][X]
-    #     j = sol[b][Y]
-    #     k = sol[b][X] + Bx1
-    #     l = sol[b][Y]
-    #     m = sol[b][X]
-    #     n = sol[b][Y] + By1
-    #     o = sol[b][X] + Bx1
-    #     p = sol[b][Y] + By1
-
-    #     if a < i and i < g and b < j and j < h and g < o and h < p:
-    #         return True
-    #     elif a < o and o < g and b < p and p < h and a < i and j < b:
-    #         return True
-    #     elif e < m and m < c and d < n and n < f and c < k and l < d:
-    #         return True
-    #     elif e < k and k < c and d < l and l < f and m < e and f < n:
-    #         return True
-    #     else:
-    #         return False
-
-    def outside(self, sol: Solution, a: int) -> bool:
-        x: int = 0
-        y: int = 1
-
-        if sol[a][2] != 90:
-            ax1 = sol[a][x] + self._items[a][0]
-            ay1 = sol[a][y] + self._items[a][0]
-        else:
-            ax1 = sol[a][x] + self._items[a][1]
-            ay1 = sol[a][y] + self._items[a][1]
-        if (
-            0 <= sol[a][x]
-            and ax1 <= self._capacity[x]
-            and 0 <= sol[a][y]
-            and ay1 <= self._capacity[y]
-        ):
-            return False
-        else:
-            return True
-
-    def evaluation(self, sol: Solution) -> None:
-        # Find number of collisions
+    def find_num_collisions(self, sol: Solution) -> int:
         num_collisions: int = 0
-        for i in range(len(sol)):
-            for j in range(i + 1, len(sol)):
-                if sol.is_valid_coordinate(i) and sol.is_valid_coordinate(j):
-                    if self.collision(sol, i, j):
+        for i, coordinate_a in enumerate(sol[:-1]):  # comparing all coordinates except last ...
+            opposite_coordinates = sol[i + 1 :]  # ... to the next one(s) in the list
+            for j, coordinate_b in enumerate(opposite_coordinates, start=1):
+                if coordinate_a.is_valid() and coordinate_b.is_valid():
+                    if self.has_collision(
+                        coordinate_a, self.get_item(i), coordinate_b, self.get_item(i + j)
+                    ):
                         num_collisions += 1
+        return num_collisions
 
-        # Find number of rectangles that are outside
-        num_outside: int = 0
-        for i in range(len(sol)):
-            if sol.is_valid_coordinate(i):
-                if self.outside(sol, i):
-                    num_outside += 1
+    def evaluate(self, sol: Solution) -> None:
+        num_collisions = self.find_num_collisions(sol)
+        num_outside = sum(
+            coordinate.is_valid() and not self.is_inside(coordinate, self.get_item(i))
+            for i, coordinate in enumerate(sol)
+        )
 
         if num_collisions > 0:
             sol.set_fitness(-float(num_collisions + num_outside))
         else:
-            num_valid_squares: int = 0
-            for i in range(len(sol)):
-                if sol.is_valid_coordinate(i):
-                    num_valid_squares += 1
-
-            sol.set_fitness(float(num_valid_squares))
-
-    def get_capacity(self) -> CoordinateType:
-        return self._capacity
-
-    def get_item(self, index: int) -> CoordinateType:
-        return self._items[index]
-
-    def get_instance_size(self) -> int:
-        return len(self._items)
+            num_valid_coordinates = sum(coordinate.is_valid() for coordinate in sol)
+            sol.set_fitness(float(num_valid_coordinates))

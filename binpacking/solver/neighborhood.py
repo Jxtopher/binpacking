@@ -1,7 +1,7 @@
 from random import randint, random
 import copy
 
-from binpacking.solver.solution import Solution
+from binpacking.solver.solution import Solution, Coordinate
 from binpacking.solver.bin_packing_2d import BinPacking2D
 
 
@@ -15,27 +15,31 @@ class Neighborhood:
             capacity = self.instance.get_capacity()
             item = self.instance.get_item(i)
             if random() < 0.5:
-                s[i] = (
-                    randint(0, capacity[0] - item[0]),  # x
-                    randint(0, capacity[1] - item[0]),  # y
-                    randint(0, 1) * 90,  # Rotation
+                x, y = (
+                    randint(0, capacity.width - item.width),
+                    randint(0, capacity.height - item.height),
                 )
+                s[i] = Coordinate(x, y)
+                if random() < 0.5:
+                    s[i].rotate()
             else:
                 s.set_coordinate_as_invalid(i)
         return s
 
-    def one_case_mutation(self, sol: Solution) -> Solution:
+    def find_one_mutation_neighbor(self, sol: Solution) -> Solution:
         s = copy.deepcopy(sol)
 
         if random() < 0.5:
             index = randint(0, len(s))
             capacity = self.instance.get_capacity()
             item = self.instance.get_item(index)
-            s[index] = (
-                randint(0, capacity[0] - item[0]),  # x
-                randint(0, capacity[1] - item[0]),  # y
-                randint(0, 1) * 90,  # Rotation
+            x, y = (
+                randint(0, capacity.width - item.width),
+                randint(0, capacity.height - item.height),
             )
+            s[index] = Coordinate(x, y)
+            if random() < 0.5:
+                s[index].rotate()
         else:
             s.set_coordinate_as_invalid(index)
 
