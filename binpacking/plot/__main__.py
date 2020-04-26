@@ -16,6 +16,6 @@ if __name__ == '__main__':
     sol[3] = Coordinate(3, 3)
 
     plot_handler = PlotHandler(instance, sol)
-    results_filepath = plot_handler.save_to_file('cool_plot.png')
+    results_filepath = plot_handler.save_to_file('test_plt.png')
 
     print(f'Done! You may look at the results in {results_filepath}')
