@@ -28,9 +28,9 @@ class Neighborhood:
 
     def find_one_mutation_neighbor(self, sol: Solution) -> Solution:
         s = copy.deepcopy(sol)
-
+        index = randint(0, len(s)-1)
+        
         if random() < 0.5:
-            index = randint(0, len(s))
             capacity = self.instance.get_capacity()
             item = self.instance.get_item(index)
             x, y = (

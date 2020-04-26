@@ -30,7 +30,7 @@ class TabuSearch:
         iterations = 0
         # while the stop criteria isn't reached
         while iterations < self.max_iterations:
-            s_prim = self.neighborhood.find_random_neighbor(s_star)
+            s_prim = self.neighborhood.find_one_mutation_neighbor(s_star)
 
             # cpt = 0
             # while s_prim in self.tabu_deque:
@@ -42,10 +42,11 @@ class TabuSearch:
             #     cpt += 1
 
             self.bin_packing.evaluate(s_prim)
-            print(s_prim)
+
             # mimi ou maximi
             if s_star.get_fitness() < s_prim.get_fitness():
                 s_star = copy.deepcopy(s_prim)
+                print(s_star)
 
             self.tabu_deque.append(s_prim)
 

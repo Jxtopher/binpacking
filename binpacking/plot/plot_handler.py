@@ -47,7 +47,7 @@ class PlotHandler:
                     (x, y),
                     rectangle.width,
                     rectangle.height,
-                    linewidth=1,
+                    linewidth=0,
                     color=self._get_random_color(),
                 )
             )
