@@ -30,36 +30,13 @@ class BinPacking2D:
         coordinate_b: Coordinate,
         item_b: Rectangle,
     ) -> bool:
-        angles_a = [
-            (coordinate_a.x, coordinate_a.y),
-            (coordinate_a.x + item_a.width, coordinate_a.y),
-            (coordinate_a.x, coordinate_a.y + item_a.height),
-            (coordinate_a.x + item_a.width, coordinate_a.y + item_a.height),
-        ]
-        angles_b = [
-            (coordinate_b.x, coordinate_b.y),
-            (coordinate_b.x + item_b.width, coordinate_b.y),
-            (coordinate_b.x, coordinate_b.y + item_b.height),
-            (coordinate_b.x + item_b.width, coordinate_b.y + item_b.height),
-        ]
-
-        if angles_a[1][0] <= angles_b[0][0]:  # Right
-            return False
-        elif angles_b[1][0] <= angles_a[0][0]:  # Left
-            return False
-        elif angles_a[3][1] <= angles_b[1][1]:  # Top
-            return False
-        elif angles_b[3][1] <= angles_a[1][1]:  # Below
-            return False
-        elif angles_b[1][0] <= angles_a[0][0] and angles_a[3][1] <= angles_b[1][1]:  # Right-up
-            return False
-        elif angles_a[3][1] <= angles_b[1][1] and angles_b[1][0] <= angles_a[0][0]:  # Top Left
-            return False
-        elif angles_b[3][1] <= angles_a[1][1] and angles_b[1][0] <= angles_a[0][0]:  # Below Left
-            return False
-        elif angles_b[3][1] <= angles_a[1][1] and angles_a[1][0] <= angles_b[0][0]:  # Below right
-            return False
-        return True
+        any_collision = (
+            coordinate_a.x + item_a.width <= coordinate_b.x  # Right
+            or coordinate_b.x + item_b.width <= coordinate_a.x  # Left
+            or coordinate_a.y + item_a.height <= coordinate_b.y  # Top
+            or coordinate_b.y + item_b.height <= coordinate_a.y  # Bottom
+        )
+        return not any_collision
 
     def is_inside(self, coordinate: Coordinate, item: Rectangle) -> bool:
         return (
