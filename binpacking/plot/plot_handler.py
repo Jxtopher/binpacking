@@ -19,28 +19,16 @@ class PlotHandler:
         self.items = []
         for i in range(instance.get_instance_size()):
             if solution.is_valid_coordinate(i):
-                if solution[i][2] == 0:
-                    self.items.append(
+                a, b = (0, 1) if solution[i][2] == 0 else (1, 0)
+                self.items.append(
+                    (
+                        (solution[i][0], solution[i][1]),
                         (
-                            (solution[i][0], solution[i][1]),
-                            (
-                                solution[i][0] + instance.get_item(i)[0],
-                                solution[i][1] + instance.get_item(i)[1],
-                            ),
-                        )
+                            solution[i][0] + instance.get_item(i)[a],
+                            solution[i][1] + instance.get_item(i)[b],
+                        ),
                     )
-                elif solution[i][2] == 90:
-                    self.items.append(
-                        (
-                            (solution[i][0], solution[i][1]),
-                            (
-                                solution[i][0] + instance.get_item(i)[1],
-                                solution[i][1] + instance.get_item(i)[0],
-                            ),
-                        )
-                    )
-                else:
-                    raise ValueError(f'Invalid rotation value {solution[i][2]}')
+                )
 
     @staticmethod
     def _get_random_color() -> Tuple[float, float, float]:

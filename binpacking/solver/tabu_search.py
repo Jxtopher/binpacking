@@ -24,8 +24,8 @@ class TabuSearch:
     def run(self, sol: Solution) -> Solution:
         # Best known solution
         s_star = copy.deepcopy(sol)
-        if not s_star.get_fitness_is_valid():
-            self.bin_packing.evaluation(s_star)
+        if not s_star.has_valid_fitness():
+            self.bin_packing.evaluate(s_star)
 
         iterations = 0
         # while the stop criteria isn't reached
@@ -41,7 +41,7 @@ class TabuSearch:
             #         raise Exception('[-] no more found neighbors')
             #     cpt += 1
 
-            self.bin_packing.evaluation(s_prim)
+            self.bin_packing.evaluate(s_prim)
             print(s_prim)
             # mimi ou maximi
             if s_star.get_fitness() < s_prim.get_fitness():

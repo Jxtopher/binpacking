@@ -10,7 +10,7 @@ class InstanceLoader:
     INSTANCES_FOLDER_NAME = 'instances'
 
     @classmethod
-    def loadJson(cls, filename: str) -> InstanceType:
+    def load_json(cls, filename: str) -> InstanceType:
         file_path = path.join(cls.INSTANCES_FOLDER_NAME, filename)
         with open(file_path) as f:
             content = f.read()
@@ -18,7 +18,7 @@ class InstanceLoader:
 
     @classmethod
     def get_bin_packing(cls, file_path: str) -> BinPacking2D:
-        loaded_instance = cls.loadJson(file_path)
+        loaded_instance = cls.load_json(file_path)
         # not super nice to cast but JSON doesn't have tuples
         capacity = cast(CoordinateType, tuple(loaded_instance['capacity']))
         items = [cast(CoordinateType, tuple(item)) for item in loaded_instance['items']]

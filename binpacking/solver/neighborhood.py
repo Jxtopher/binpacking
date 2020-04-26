@@ -24,7 +24,7 @@ class Neighborhood:
                 s.set_coordinate_as_invalid(i)
         return s
 
-    def one_case_mutation(self, sol: Solution) -> Solution:
+    def find_one_mutation_neighbor(self, sol: Solution) -> Solution:
         s = copy.deepcopy(sol)
 
         if random() < 0.5:
