@@ -30,13 +30,13 @@ class BinPacking2D:
         coordinate_b: Coordinate,
         item_b: Rectangle,
     ) -> bool:
-        any_collision = (
-            coordinate_a.x + item_a.width <= coordinate_b.x  # Right
-            or coordinate_b.x + item_b.width <= coordinate_a.x  # Left
-            or coordinate_a.y + item_a.height <= coordinate_b.y  # Top
-            or coordinate_b.y + item_b.height <= coordinate_a.y  # Bottom
+        is_not_colliding = (
+            coordinate_a.x + item_a.width <= coordinate_b.x
+            or coordinate_b.x + item_b.width <= coordinate_a.x
+            or coordinate_a.y + item_a.height <= coordinate_b.y
+            or coordinate_b.y + item_b.height <= coordinate_a.y
         )
-        return not any_collision
+        return not is_not_colliding
 
     def is_inside(self, coordinate: Coordinate, item: Rectangle) -> bool:
         return (
