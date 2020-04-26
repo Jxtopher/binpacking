@@ -9,6 +9,9 @@ class Coordinate:
         self._y = y
         self.is_rotated = False
 
+    def __repr__(self) -> str:
+        return f'({self.x}, {self.y}, {90 if self.is_rotated else 0})'
+
     @property
     def x(self) -> int:
         return self._y if self.is_rotated else self._x
