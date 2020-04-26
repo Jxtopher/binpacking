@@ -16,12 +16,12 @@ class PlotHandler:
 
     def __init__(self, instance: BinPacking2D, sol: Solution):
         self.capacity = instance.get_capacity()
-        self.items: List[Tuple[int, int, Rectangle]] = []
+        self.rectangles_with_coordinates: List[Tuple[int, int, Rectangle]] = []
 
         for i, coordinate in enumerate(sol):
             if coordinate.is_valid():
                 item = instance.get_item(i)
-                self.items.append((coordinate.x, coordinate.y, item))
+                self.rectangles_with_coordinates.append((coordinate.x, coordinate.y, item))
 
     @staticmethod
     def _get_random_color() -> Tuple[float, float, float]:
@@ -40,8 +40,8 @@ class PlotHandler:
             )
         )
 
-        for item in self.items:
-            x, y, rectangle = item
+        for rectangle_with_coordinate in self.rectangles_with_coordinates:
+            x, y, rectangle = rectangle_with_coordinate
             ax.add_patch(
                 patches.Rectangle(
                     (x, y),
