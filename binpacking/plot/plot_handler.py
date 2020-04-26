@@ -21,13 +21,7 @@ class PlotHandler:
         for i, coordinate in enumerate(sol):
             if coordinate.is_valid():
                 item = instance.get_item(i)
-                self.items.append(
-                    (
-                        coordinate.x,
-                        coordinate.y,
-                        Rectangle(coordinate.x + item.width, coordinate.y + item.height),
-                    )
-                )
+                self.items.append((coordinate.x, coordinate.y, item))
 
     @staticmethod
     def _get_random_color() -> Tuple[float, float, float]:
