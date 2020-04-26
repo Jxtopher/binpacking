@@ -47,6 +47,13 @@ class BinPacking2DTest(BaseTestCase):
         sol[1] = Coordinate(0, 2)
         self.assertFalse(instance.has_collision(sol[0], item_a, sol[1], item_b))
 
+        item_a = Rectangle(2, 4)
+        item_b = Rectangle(4, 2)
+        instance = BinPacking2D(Rectangle(10, 10), [item_a, item_b])
+        sol[0] = Coordinate(2, 2)
+        sol[1] = Coordinate(1, 3)
+        self.assertTrue(instance.has_collision(sol[0], item_a, sol[1], item_b))
+
     def test_is_inside(self) -> None:
         item_0 = Rectangle(6, 6)
         instance = BinPacking2D(Rectangle(100, 100), [item_0])
