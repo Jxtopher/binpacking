@@ -11,6 +11,15 @@ class BinPacking2DTest(BaseTestCase):
         sol = Solution(instance.get_instance_size())
         self.assertTrue(instance.has_collision(sol[0], item_a, sol[1], item_b))
 
+
+        sol[0] = Coordinate(4, 4)
+        sol[1] = Coordinate(2, 2)
+        self.assertFalse(instance.has_collision(sol[0], item_a, sol[1], item_b))
+
+        sol[0] = Coordinate(4, 4)
+        sol[1] = Coordinate(4, 4)
+        self.assertTrue(instance.has_collision(sol[0], item_a, sol[1], item_b))
+
         sol[0] = Coordinate(0, 0)
         sol[1] = Coordinate(6, 6)
         self.assertFalse(instance.has_collision(sol[0], item_a, sol[1], item_b))
