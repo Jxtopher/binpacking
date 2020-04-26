@@ -47,13 +47,6 @@ class BinPacking2DTest(BaseTestCase):
         sol[1] = Coordinate(0, 2)
         self.assertFalse(instance.has_collision(sol[0], item_a, sol[1], item_b))
 
-        item_a = Rectangle(2, 4)
-        item_b = Rectangle(4, 2)
-        instance = BinPacking2D(Rectangle(10, 10), [item_a, item_b])
-        sol[0] = Coordinate(2, 2)
-        sol[1] = Coordinate(1, 3)
-        self.assertTrue(instance.has_collision(sol[0], item_a, sol[1], item_b))
-
     def test_has_collision_with_overlapping_rectangles(self) -> None:
         item_a = Rectangle(6, 2)
         item_b = Rectangle(2, 6)
@@ -66,6 +59,13 @@ class BinPacking2DTest(BaseTestCase):
         self.assertTrue(instance.has_collision(sol[0], item_a, sol[1], item_b))
         self.assertTrue(instance.has_collision(sol[1], item_b, sol[0], item_a))
 
+        item_a = Rectangle(2, 4)
+        item_b = Rectangle(4, 2)
+        instance = BinPacking2D(Rectangle(10, 10), [item_a, item_b])
+        sol[0] = Coordinate(2, 2)
+        sol[1] = Coordinate(1, 3)
+        self.assertTrue(instance.has_collision(sol[0], item_a, sol[1], item_b))
+        self.assertTrue(instance.has_collision(sol[1], item_a, sol[0], item_b))
 
     def test_is_inside(self) -> None:
         item_0 = Rectangle(6, 6)

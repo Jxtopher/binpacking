@@ -23,39 +23,6 @@ class BinPacking2D:
     def get_instance_size(self) -> int:
         return len(self.items)
 
-    # def has_collision(
-    #     self,
-    #     coordinate_a: Coordinate,
-    #     item_a: Rectangle,
-    #     coordinate_b: Coordinate,
-    #     item_b: Rectangle,
-    # ) -> bool:
-    #     angles_a = [
-    #         (coordinate_a.x, coordinate_a.y),
-    #         (coordinate_a.x + item_a.width, coordinate_a.y),
-    #         (coordinate_a.x, coordinate_a.y + item_a.height),
-    #         (coordinate_a.x + item_a.width, coordinate_a.y + item_a.height),
-    #     ]
-    #     angles_b = [
-    #         (coordinate_b.x, coordinate_b.y),
-    #         (coordinate_b.x + item_b.width, coordinate_b.y),
-    #         (coordinate_b.x, coordinate_b.y + item_b.height),
-    #         (coordinate_b.x + item_b.width, coordinate_b.y + item_b.height),
-    #     ]
-    #     angles = angles_a + angles_b
-    #     num_angles_a = len(angles_a)
-
-    #     for i, (x, y) in enumerate(angles):
-    #         opposite_coordinate = coordinate_b if i < num_angles_a else coordinate_a
-    #         opposite_item = item_b if i < num_angles_a else item_a
-    #         if (
-    #             opposite_coordinate.x < x < opposite_coordinate.x + opposite_item.width
-    #             and opposite_coordinate.y < y < opposite_coordinate.y + opposite_item.height
-    #         ):
-    #             return True
-
-    #     return False
-
     def has_collision(
         self,
         coordinate_a: Coordinate,
@@ -76,21 +43,21 @@ class BinPacking2D:
             (coordinate_b.x + item_b.width, coordinate_b.y + item_b.height),
         ]
 
-        if angles_a[1][0] <= angles_b[0][0]:  # Droite
+        if angles_a[1][0] <= angles_b[0][0]:  # Right
             return False
-        elif angles_b[1][0] <= angles_a[0][0]:  # Gauche
+        elif angles_b[1][0] <= angles_a[0][0]:  # Left
             return False
-        elif angles_a[3][1] <= angles_b[1][1]:  # Haut
+        elif angles_a[3][1] <= angles_b[1][1]:  # Top
             return False
-        elif angles_b[3][1] <= angles_a[1][1]:  # bas
+        elif angles_b[3][1] <= angles_a[1][1]:  # Below
             return False
-        elif angles_b[1][0] <= angles_a[0][0] and angles_a[3][1] <= angles_b[1][1]:  # Droite-haut
+        elif angles_b[1][0] <= angles_a[0][0] and angles_a[3][1] <= angles_b[1][1]:  # Right-up
             return False
-        elif angles_a[3][1] <= angles_b[1][1] and angles_b[1][0] <= angles_a[0][0]:  # Haut-Gauche
+        elif angles_a[3][1] <= angles_b[1][1] and angles_b[1][0] <= angles_a[0][0]:  # Top Left
             return False
-        elif angles_b[3][1] <= angles_a[1][1] and angles_b[1][0] <= angles_a[0][0]:  # Bas-Gauche
+        elif angles_b[3][1] <= angles_a[1][1] and angles_b[1][0] <= angles_a[0][0]:  # Below Left
             return False
-        elif angles_b[3][1] <= angles_a[1][1] and angles_a[1][0] <= angles_b[0][0]:  # Bas-droite
+        elif angles_b[3][1] <= angles_a[1][1] and angles_a[1][0] <= angles_b[0][0]:  # Below right
             return False
         return True
 
