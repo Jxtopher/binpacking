@@ -30,31 +30,13 @@ class BinPacking2D:
         coordinate_b: Coordinate,
         item_b: Rectangle,
     ) -> bool:
-        angles_a = [
-            (coordinate_a.x, coordinate_a.y),
-            (coordinate_a.x + item_a.width, coordinate_a.y),
-            (coordinate_a.x, coordinate_a.y + item_a.height),
-            (coordinate_a.x + item_a.width, coordinate_a.y + item_a.height),
-        ]
-        angles_b = [
-            (coordinate_b.x, coordinate_b.y),
-            (coordinate_b.x + item_b.width, coordinate_b.y),
-            (coordinate_b.x, coordinate_b.y + item_b.height),
-            (coordinate_b.x + item_b.width, coordinate_b.y + item_b.height),
-        ]
-        angles = angles_a + angles_b
-        num_angles_a = len(angles_a)
-
-        for i, (x, y) in enumerate(angles):
-            opposite_coordinate = coordinate_b if i < num_angles_a else coordinate_a
-            opposite_item = item_b if i < num_angles_a else item_a
-            if (
-                opposite_coordinate.x < x < opposite_coordinate.x + opposite_item.width
-                and opposite_coordinate.y < y < opposite_coordinate.y + opposite_item.height
-            ):
-                return True
-
-        return False
+        is_not_colliding = (
+            coordinate_a.x + item_a.width <= coordinate_b.x
+            or coordinate_b.x + item_b.width <= coordinate_a.x
+            or coordinate_a.y + item_a.height <= coordinate_b.y
+            or coordinate_b.y + item_b.height <= coordinate_a.y
+        )
+        return not is_not_colliding
 
     def is_inside(self, coordinate: Coordinate, item: Rectangle) -> bool:
         return (
