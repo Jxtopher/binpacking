@@ -22,12 +22,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     bin_packing = InstanceLoader.get_bin_packing(args.instance)
-    neighborhood = Neighborhood(bin_packing)
     sol_init = Solution(bin_packing.get_instance_size())
 
     tabu_size = 5
     max_iterations = args.max_iterations
-    ts = TabuSearch(bin_packing, tabu_size, max_iterations, neighborhood)
+    ts = TabuSearch(bin_packing, tabu_size, max_iterations, Neighborhood.find_one_mutation_neighbor)
 
     s_star = ts.run(sol_init)
     print('best solution')
