@@ -1,10 +1,9 @@
-from typing import Deque
+from typing import Deque, Callable
 from collections import deque
 import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
-from binpacking.solver.neighborhood import Neighborhood
 
 
 class TabuSearch:
@@ -13,7 +12,7 @@ class TabuSearch:
         bin_packing: BinPacking2D,
         tabu_size: int,
         max_iterations: int,
-        neighborhood: Neighborhood,
+        neighborhood: Callable[[BinPacking2D, Solution], None],
     ):
         self.bin_packing = bin_packing
         self.tabu_size = tabu_size
@@ -30,7 +29,8 @@ class TabuSearch:
         iterations = 0
         # while the stop criteria isn't reached
         while iterations < self.max_iterations:
-            s_prim = self.neighborhood.find_one_mutation_neighbor(s_star)
+            s_prim = copy.deepcopy(s_star)
+            self.neighborhood(self.bin_packing, s_prim)
 
             # cpt = 0
             # while s_prim in self.tabu_deque:
