@@ -20,7 +20,6 @@ class Neighborhood:
                     sol[i].rotate()
             else:
                 sol.set_coordinate_as_invalid(i)
-        return sol
 
     @staticmethod
     def find_one_mutation_neighbor(instance: BinPacking2D, sol: Solution) -> None:
