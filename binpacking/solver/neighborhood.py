@@ -1,5 +1,4 @@
 from random import randint, random
-import copy
 
 from binpacking.solver.solution import Solution, Coordinate
 from binpacking.solver.bin_packing_2d import BinPacking2D
@@ -8,7 +7,7 @@ from binpacking.solver.bin_packing_2d import BinPacking2D
 class Neighborhood:
     @staticmethod
     def find_random_neighbor(instance: BinPacking2D, sol: Solution) -> None:
-        for i in range(len(s)):
+        for i in range(len(sol)):
             capacity = instance.get_capacity()
             item = instance.get_item(i)
             if random() < 0.5:
