@@ -1,10 +1,13 @@
+# @brief : F. Glover, "Future paths for integer programming and links to artificial intelligence,"
+#          Computers & Operations Research, vol. 13, pp. 533-549, 1986.
+
 from typing import Deque, Callable
 from collections import deque
 import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
-from binpacking.solver.optimisationAlgo import OptimisationAlgo
+from binpacking.solver.optimisation_algo import OptimisationAlgo
 
 
 class TabuSearch(OptimisationAlgo):

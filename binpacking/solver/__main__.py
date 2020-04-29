@@ -26,8 +26,10 @@ if __name__ == '__main__':
 
     tabu_size = 5
     max_iterations = args.max_iterations
-    ts = TabuSearch(bin_packing, tabu_size, max_iterations, getattr(Neighborhood, 'find_one_mutation_neighbor'))
-     
+    ts = TabuSearch(
+        bin_packing, tabu_size, max_iterations, getattr(Neighborhood, 'find_one_mutation_neighbor')
+    )
+
     s_star = ts.run(sol_init)
     print('best solution')
     print(s_star)
