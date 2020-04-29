@@ -12,12 +12,12 @@ class TabuSearch:
         bin_packing: BinPacking2D,
         tabu_size: int,
         max_iterations: int,
-        neighborhood: Callable[[BinPacking2D, Solution], None],
+        find_neighborhood: Callable[[BinPacking2D, Solution], None],
     ):
         self.bin_packing = bin_packing
         self.tabu_size = tabu_size
         self.max_iterations = max_iterations
-        self.neighborhood = neighborhood
+        self.find_neighborhood = find_neighborhood
         self.tabu_deque: Deque[Solution] = deque(maxlen=self.tabu_size)
 
     def run(self, sol: Solution) -> Solution:
@@ -30,11 +30,11 @@ class TabuSearch:
         # while the stop criteria isn't reached
         while iterations < self.max_iterations:
             s_prim = copy.deepcopy(s_star)
-            self.neighborhood(self.bin_packing, s_prim)
+            self.find_neighborhood(self.bin_packing, s_prim)
 
             # cpt = 0
             # while s_prim in self.tabu_deque:
-            #     s_prim = self.neighborhood(s_star)
+            #     s_prim = self.find_neighborhood(s_star)
             #     print(s_prim)
             #     if 500 < cpt:
             #         print(cpt)
