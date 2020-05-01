@@ -70,3 +70,7 @@ class BinPacking2D:
         else:
             num_valid_coordinates = sum(coordinate.is_valid() for coordinate in sol)
             sol.set_fitness(float(num_valid_coordinates))
+
+    def get_available_area(self, sol: Solution) -> float:
+        # TODO need to complete
+        return 0.0
