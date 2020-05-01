@@ -41,20 +41,13 @@ class Neighborhood:
         index = random.sample(set(range(len(sol) - 1)), 2)
 
         capacity = instance.get_capacity()
-        item = instance.get_item(index[0])
-        x, y = (
-            random.randint(0, capacity.width - item.width),
-            random.randint(0, capacity.height - item.height),
-        )
-        sol[index[0]] = Coordinate(x, y)
-        if random.random() < 0.5:
-            sol[index[0]].rotate()
 
-        item = instance.get_item(index[1])
-        x, y = (
-            random.randint(0, capacity.width - item.width),
-            random.randint(0, capacity.height - item.height),
-        )
-        sol[index[1]] = Coordinate(x, y)
-        if random.random() < 0.5:
-            sol[index[1]].rotate()
+        for i in [0, 1]:
+            item = instance.get_item(index[i])
+            x, y = (
+                random.randint(0, capacity.width - item.width),
+                random.randint(0, capacity.height - item.height),
+            )
+            sol[index[i]] = Coordinate(x, y)
+            if random.random() < 0.5:
+                sol[index[i]].rotate()
