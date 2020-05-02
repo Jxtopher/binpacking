@@ -7,6 +7,7 @@ import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
+from binpacking.solver.neighborhood import Neighborhood
 from binpacking.solver.optimisation_algo import OptimisationAlgo
 
 
@@ -29,9 +30,12 @@ class IteratedLocalSearch(OptimisationAlgo):
         # while the stop criteria isn't reached
         while iterations < self.max_iterations:
             s_prim = copy.deepcopy(s_star)
+            Neighborhood.find_random_neighbor(bin_packing, s_prim)
             self.optimisation_algo.run(s_prim)
+            
+            if not s_star.has_valid_fitness():
+                self.bin_packing.evaluate(s_prim)
 
-            self.bin_packing.evaluate(s_prim)
             if s_star.get_fitness() < s_prim.get_fitness():
                 s_star = copy.deepcopy(s_prim)
                 print(s_star)

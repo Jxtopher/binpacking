@@ -1,0 +1,37 @@
+{
+    "instance": ".json",
+    "seed": 0,
+    "OptimizationAlgorithm": {
+            "name": "FirstImprovement",
+            "StoppingCriteria": {
+                "budget": 1
+            },
+            "AtomicOperation": {
+                "className": "FlipBit",
+                "c": 1
+            }
+    },
+
+    "Statistic": {
+        "recording":"stdout",
+        // "recording":"none"
+        //"recording":"file",
+        //"namefile":"toto.txt"
+        // "recording":"mongodb",
+        // "hostname":"localhost",
+        // "database": "db",
+        // "collection": "c",
+        // "sensorExperience" : {
+        //     "name" : "oneMax",
+        //     "num" : 6
+        // },
+        "sensorNameCallingClass": true,
+        "sensorNumRound" : false,
+        "sensorSolution" : false,
+        "sensorStopwatch" : false,
+        "sensorFinal" : {
+            "name" : "oneMax",
+            "num" : 6
+        }
+    }
+}
