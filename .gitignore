@@ -1,5 +1,3 @@
-binpacking/plot/results/
-
 # Internal Python stuff:
 __pycache__/
 *.py[cod]
@@ -12,3 +10,6 @@ venv/
 
 # mypy:
 .mypy_cache/
+
+# Plot results
+plots/

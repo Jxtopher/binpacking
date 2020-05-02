@@ -10,7 +10,7 @@ from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 
 
 class PlotHandler:
-    DEFAULT_RESULTS_PATH = path.join('binpacking', 'plot', 'results')
+    DEFAULT_RESULTS_FOLDER = 'plots'
 
     BACKGROUND_COLOR = '#AAAAAA'
 
@@ -52,8 +52,8 @@ class PlotHandler:
 
         return figure
 
-    def save_to_file(self, filename: str, results_path: str = DEFAULT_RESULTS_PATH) -> str:
+    def save_to_file(self, filename: str, results_folder: str = DEFAULT_RESULTS_FOLDER) -> str:
         figure = self._process()
-        results_filepath = path.join(results_path, filename)
+        results_filepath = path.join(results_folder, filename)
         figure.savefig(results_filepath, dpi=90, bbox_inches='tight')
         return results_filepath
