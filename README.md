@@ -36,6 +36,12 @@ Do some plotting:
 make plot
 ```
 
+Or run the solver:
+
+```
+make run-solver
+```
+
 Optionally if you are using VSCode you may use the settings in `.vscode.example/settings.json`:
 
 ```sh
