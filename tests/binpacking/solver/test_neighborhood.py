@@ -26,7 +26,7 @@ class NeighborhoodTest(BaseTestCase):
         for i in range(len(sol)):
             if (
                 sol[i].x != sol_tmp[i].x
-                and sol[i].y != sol_tmp[i].y
+                or sol[i].y != sol_tmp[i].y
                 and sol[i].rotate != sol_tmp[i].rotate
             ):
                 cpt += 1
