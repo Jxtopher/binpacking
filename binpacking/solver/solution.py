@@ -12,6 +12,10 @@ class Coordinate:
     def __repr__(self) -> str:
         return f'({self.x}, {self.y}, {90 if self.is_rotated else 0})'
 
+    def __eq__(self, other: object) -> bool:
+        assert isinstance(other, Coordinate)
+        return self.x == other.x and self.y == other.y and self.is_rotated == other.is_rotated
+
     def is_valid(self) -> bool:
         return (self.x, self.y) != self.INVALID_COORDINATE
 
