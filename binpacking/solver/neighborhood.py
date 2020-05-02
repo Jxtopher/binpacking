@@ -44,8 +44,8 @@ class Neighborhood:
 
         capacity = instance.get_capacity()
 
-        if random() < 0.5:
-            for index in indexes_sample:
+        for index in indexes_sample:
+            if random() < 0.5:
                 item = instance.get_item(indexes_sample[index])
                 x, y = (
                     randint(0, capacity.width - item.width),
@@ -54,6 +54,5 @@ class Neighborhood:
                 sol[indexes_sample[index]] = Coordinate(x, y)
                 if random() < 0.5:
                     sol[indexes_sample[index]].rotate()
-        else:
-            for index in indexes_sample:
+            else:
                 sol.set_coordinate_as_invalid(index)
