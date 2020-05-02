@@ -36,23 +36,24 @@ class Neighborhood:
             if random() < 0.5:
                 sol[index].rotate()
         else:
-            sol.set_coordinate_as_invalid(i)
+            sol.set_coordinate_as_invalid(index)
 
     @staticmethod
     def find_two_mutation_neighbor(instance: BinPacking2D, sol: Solution) -> None:
-        indexes_sample = sample(set(range(len(sol))), 2)
+        indexes_sample = sample(range(len(sol)), 2)
 
         capacity = instance.get_capacity()
 
         if random() < 0.5:
-            for i in indexes_sample:
-                item = instance.get_item(indexes_sample[i])
+            for index in indexes_sample:
+                item = instance.get_item(indexes_sample[index])
                 x, y = (
                     randint(0, capacity.width - item.width),
                     randint(0, capacity.height - item.height),
                 )
-                sol[indexes_sample[i]] = Coordinate(x, y)
+                sol[indexes_sample[index]] = Coordinate(x, y)
                 if random() < 0.5:
-                    sol[indexes_sample[i]].rotate()
+                    sol[indexes_sample[index]].rotate()
         else:
-            sol.set_coordinate_as_invalid(i)
+            for index in indexes_sample:
+                sol.set_coordinate_as_invalid(index)
