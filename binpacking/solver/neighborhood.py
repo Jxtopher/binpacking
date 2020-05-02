@@ -40,19 +40,19 @@ class Neighborhood:
 
     @staticmethod
     def find_two_mutation_neighbor(instance: BinPacking2D, sol: Solution) -> None:
-        index = sample(set(range(len(sol))), 2)
+        indexes_sample = sample(set(range(len(sol))), 2)
 
         capacity = instance.get_capacity()
 
         if random() < 0.5:
-            for i in [0, 1]:
-                item = instance.get_item(index[i])
+            for i in indexes_sample:
+                item = instance.get_item(indexes_sample[i])
                 x, y = (
                     randint(0, capacity.width - item.width),
                     randint(0, capacity.height - item.height),
                 )
-                sol[index[i]] = Coordinate(x, y)
+                sol[indexes_sample[i]] = Coordinate(x, y)
                 if random() < 0.5:
-                    sol[index[i]].rotate()
+                    sol[indexes_sample[i]].rotate()
         else:
             sol.set_coordinate_as_invalid(i)
