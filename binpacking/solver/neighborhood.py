@@ -1,4 +1,4 @@
-from random import randint, random
+from random import randint, random, sample
 
 from binpacking.solver.solution import Solution, Coordinate
 from binpacking.solver.bin_packing_2d import BinPacking2D
@@ -37,3 +37,23 @@ class Neighborhood:
                 sol[index].rotate()
         else:
             sol.set_coordinate_as_invalid(index)
+
+    @staticmethod
+    def find_two_mutation_neighbor(instance: BinPacking2D, sol: Solution) -> None:
+        indexes_sample = sample(range(len(sol)), 2)
+        print(indexes_sample)
+
+        capacity = instance.get_capacity()
+
+        for index in indexes_sample:
+            if random() < 0.5:
+                item = instance.get_item(index)
+                x, y = (
+                    randint(0, capacity.width - item.width),
+                    randint(0, capacity.height - item.height),
+                )
+                sol[index] = Coordinate(x, y)
+                if random() < 0.5:
+                    sol[index].rotate()
+            else:
+                sol.set_coordinate_as_invalid(index)
