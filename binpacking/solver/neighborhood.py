@@ -46,13 +46,13 @@ class Neighborhood:
 
         for index in indexes_sample:
             if random() < 0.5:
-                item = instance.get_item(indexes_sample[index])
+                item = instance.get_item(index)
                 x, y = (
                     randint(0, capacity.width - item.width),
                     randint(0, capacity.height - item.height),
                 )
-                sol[indexes_sample[index]] = Coordinate(x, y)
+                sol[index] = Coordinate(x, y)
                 if random() < 0.5:
-                    sol[indexes_sample[index]].rotate()
+                    sol[index].rotate()
             else:
                 sol.set_coordinate_as_invalid(index)
