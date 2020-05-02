@@ -27,7 +27,7 @@ class NeighborhoodTest(BaseTestCase):
             if (
                 sol[i].x != sol_tmp[i].x
                 or sol[i].y != sol_tmp[i].y
-                and sol[i].rotate != sol_tmp[i].rotate
+                or sol[i].is_rotated != sol_tmp[i].is_rotated
             ):
                 cpt += 1
 
