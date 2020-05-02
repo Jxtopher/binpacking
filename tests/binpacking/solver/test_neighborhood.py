@@ -17,6 +17,7 @@ class NeighborhoodTest(BaseTestCase):
         instance = BinPacking2D(
             Rectangle(5, 5), [Rectangle(1, 1), Rectangle(1, 1), Rectangle(1, 1), Rectangle(1, 1)]
         )
+
         sol = Solution(instance.get_instance_size())
         sol_tmp = copy.deepcopy(sol)
         Neighborhood.find_two_mutation_neighbor(instance, sol)
@@ -29,4 +30,5 @@ class NeighborhoodTest(BaseTestCase):
                 and sol[i].rotate != sol_tmp[i].rotate
             ):
                 cpt += 1
+
         self.assertTrue(cpt == 2)

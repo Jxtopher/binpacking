@@ -41,6 +41,7 @@ class Neighborhood:
     @staticmethod
     def find_two_mutation_neighbor(instance: BinPacking2D, sol: Solution) -> None:
         indexes_sample = sample(range(len(sol)), 2)
+        print(indexes_sample)
 
         capacity = instance.get_capacity()
 
