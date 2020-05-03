@@ -8,7 +8,7 @@ SHELL := /bin/bash
 
 PIPENV_RUN = PYTHONPATH=${PYTHONPATH}:${PWD} pipenv run
 
-ROOT_PYTHON_PACKAGES = binpacking tests
+ROOT_PYTHON_PACKAGES = binpacking tests experimentation
 
 
 list:
