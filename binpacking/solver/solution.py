@@ -5,27 +5,23 @@ class Coordinate:
     INVALID_COORDINATE = (-1, -1)
 
     def __init__(self, x: int, y: int):
-        self._x = x
-        self._y = y
+        self.x = x
+        self.y = y
         self.is_rotated = False
 
     def __repr__(self) -> str:
         return f'({self.x}, {self.y}, {90 if self.is_rotated else 0})'
 
-    @property
-    def x(self) -> int:
-        return self._y if self.is_rotated else self._x
-
-    @property
-    def y(self) -> int:
-        return self._x if self.is_rotated else self._y
+    def __eq__(self, other: object) -> bool:
+        assert isinstance(other, Coordinate)
+        return self.x == other.x and self.y == other.y and self.is_rotated == other.is_rotated
 
     def is_valid(self) -> bool:
-        return (self._x, self._y) != self.INVALID_COORDINATE
+        return (self.x, self.y) != self.INVALID_COORDINATE
 
     def invalidate(self) -> None:
         self.is_rotated = False
-        self._x, self._y = self.INVALID_COORDINATE
+        self.x, self.y = self.INVALID_COORDINATE
 
     def rotate(self) -> None:
         self.is_rotated = not self.is_rotated
