@@ -1,3 +1,3 @@
 class factorialExperiment:
-    def test() -> None:
+    def test(self) -> None:
         pass
