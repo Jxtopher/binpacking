@@ -30,9 +30,9 @@ class IteratedLocalSearch(OptimisationAlgo):
         # while the stop criteria isn't reached
         while iterations < self.max_iterations:
             s_prim = copy.deepcopy(s_star)
-            Neighborhood.find_random_neighbor(bin_packing, s_prim)
+            Neighborhood.find_random_neighbor(self.bin_packing, s_prim)
             self.optimisation_algo.run(s_prim)
-            
+
             if not s_star.has_valid_fitness():
                 self.bin_packing.evaluate(s_prim)
 
