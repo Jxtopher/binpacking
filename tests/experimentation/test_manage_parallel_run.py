@@ -10,7 +10,9 @@ class ManageParallelRunTest(BaseTestCase):
         return float(n * (n + 1)) / 2
 
     def test_run_parallel(self) -> None:
-        r = ManageParallelRun.run_parallel(ManageParallelRunTest.sum, [3, 4, 5], ret=True)
+        r = ManageParallelRun.run_parallel(
+            ManageParallelRunTest.sum, [3, 4, 5], file_path='toto', ret=True
+        )
         self.assertEqual(
             mean(r),
             mean(

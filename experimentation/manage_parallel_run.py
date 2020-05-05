@@ -23,11 +23,11 @@ class ManageParallelRun:
         run_function: Callable[..., Any],
         cmds_exec: List[Any],
         number_of_processes: Optional[int] = None,
-        stdout: str = '',
+        file_path: str = '',
         ret: bool = False,
     ) -> Any:
-        if stdout != '':
-            sys.stdout = open(stdout, 'a')
+        if file_path != '':
+            sys.stdout = open(file_path, 'a')
 
         if number_of_processes is None:
             number_of_processes = os.cpu_count()
@@ -55,9 +55,9 @@ class ManageParallelRun:
             pool.terminate()
 
         log.debug('[+] Execution time ' + str(timedelta(seconds=(time.time() - startTime))))
-        if stdout != '':
+        if file_path != '':
             if ret_info != []:
-                print(ret_info)
+                log.debug('[+] ret_info ' + str(ret_info))
             sys.stdout.close()
             sys.stdout = sys.__stdout__
 
