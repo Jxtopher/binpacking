@@ -14,17 +14,6 @@
 
     "Statistic": {
         "recording":"stdout",
-        // "recording":"none"
-        //"recording":"file",
-        //"namefile":"toto.txt"
-        // "recording":"mongodb",
-        // "hostname":"localhost",
-        // "database": "db",
-        // "collection": "c",
-        // "sensorExperience" : {
-        //     "name" : "oneMax",
-        //     "num" : 6
-        // },
         "sensorNameCallingClass": true,
         "sensorNumRound" : false,
         "sensorSolution" : false,
