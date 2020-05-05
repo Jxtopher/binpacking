@@ -11,7 +11,7 @@ from logging import getLogger
 log = getLogger(__name__)
 
 
-class manageParallelRun:
+class ManageParallelRun:
 
     # run_function	the function to be performed
     # cmds_exec	list of function arguments
@@ -20,12 +20,12 @@ class manageParallelRun:
     # ret		False -> not retrieve the outputs of the run_worker function
     @staticmethod
     def run_parallel(
-        run_function: Callable[..., str],
+        run_function: Callable[..., Any],
         cmds_exec: List[Any],
         number_of_processes: Optional[int] = None,
         stdout: str = '',
         ret: bool = False,
-    ) -> List[Any]:
+    ) -> Any:
         if stdout != '':
             sys.stdout = open(stdout, 'a')
 
@@ -33,7 +33,7 @@ class manageParallelRun:
             number_of_processes = os.cpu_count()
 
         startTime = time.time()
-        ret_info = []
+        ret_info = Any
         pool = Pool(processes=number_of_processes)
 
         shuffle(cmds_exec)
@@ -46,6 +46,7 @@ class manageParallelRun:
                 jobs = pool.map_async(run_function, cmds_exec)
                 pool.close()
                 ret_info = jobs.get()
+
             else:
                 pool.map_async(run_function, cmds_exec)
                 pool.close()
