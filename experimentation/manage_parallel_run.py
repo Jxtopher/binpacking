@@ -58,11 +58,12 @@ class ManageParallelRun:
         if stdout != '':
             if ret_info != []:
                 print(ret_info)
+            sys.stdout.close()
             sys.stdout = sys.__stdout__
+
         return ret_info
 
-    # function run_worker execute des prgrammes exterieurs avec des
-    # parametres command_line
+    # function run_worker execute external programs with parameters command_line
     @staticmethod
     def run_worker(command_line: str) -> Tuple[int, str]:
         try:
