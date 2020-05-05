@@ -42,3 +42,4 @@ class IteratedLocalSearch(OptimisationAlgo):
             iterations += 1
 
         return s_star
+    
