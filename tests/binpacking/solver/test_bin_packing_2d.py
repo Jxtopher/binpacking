@@ -85,6 +85,7 @@ class BinPacking2DTest(BaseTestCase):
         self.assertTrue(instance.is_inside(sol[0], item_0))
 
     def test_evaluate(self) -> None:
+        ###################
         instance = BinPacking2D(
             Rectangle(100, 100),
             [Rectangle(1, 1), Rectangle(1, 1), Rectangle(1, 1), Rectangle(1, 1)],
@@ -100,6 +101,7 @@ class BinPacking2DTest(BaseTestCase):
 
         self.assertEqual(fitness, 4.0)
 
+        ###################
         instance = BinPacking2D(
             Rectangle(100, 100),
             [
@@ -122,3 +124,16 @@ class BinPacking2DTest(BaseTestCase):
         instance.evaluate(sol)
         fitness = sol.get_fitness()
         self.assertEqual(fitness, 6.0)
+
+        ###################
+        sol[0] = Coordinate(0, 0)
+        sol[1] = Coordinate(0, 40)
+        sol[2] = Coordinate(0, 70)
+        sol[3] = Coordinate(30, 0)
+        sol[3].rotate()
+        sol[4] = Coordinate(30, 70)
+        sol[5] = Coordinate(30, 93)
+        sol[5].rotate()
+        instance.evaluate(sol)
+        fitness = sol.get_fitness()
+        # self.assertNotEqual(fitness, 6.0)
