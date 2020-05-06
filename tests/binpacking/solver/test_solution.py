@@ -1,6 +1,7 @@
 from tests.base import BaseTestCase
 
 from binpacking.solver.solution import Solution
+from binpacking.solver.solution import Solution
 
 
 class SolutionTest(BaseTestCase):
