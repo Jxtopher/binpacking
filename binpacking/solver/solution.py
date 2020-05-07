@@ -23,8 +23,8 @@ class Coordinate:
         self.is_rotated = False
         self.x, self.y = self.INVALID_COORDINATE
 
-    def rotate(self) -> None:
-        self.is_rotated = not self.is_rotated
+    def rotate(self, is_rotated: bool = True) -> None:
+        self.is_rotated = is_rotated  # not self.is_rotated
 
 
 class Solution(List[Coordinate]):
