@@ -12,7 +12,7 @@ from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 class PlotHandler:
     DEFAULT_RESULTS_FOLDER = 'plots'
 
-    BACKGROUND_COLOR = '#AAAAAA'
+    BACKGROUND_COLOR = '#FFFFFF'
 
     def __init__(self, instance: BinPacking2D, sol: Solution):
         self.capacity = instance.get_capacity()
@@ -46,7 +46,12 @@ class PlotHandler:
             width, height = rectangle.get_width_height(is_rotated)
             ax.add_patch(
                 patches.Rectangle(
-                    (x, y), width, height, linewidth=0, color=self._get_random_color()
+                    (x, y),
+                    width,
+                    height,
+                    linewidth=0.1,
+                    edgecolor='black',
+                    facecolor=self._get_random_color(),
                 )
             )
 
