@@ -32,3 +32,4 @@ class Backtracking(OptimisationAlgo):
                             plot_handler.save_to_file(
                                 'test_backtracking' + str(randint(0, 1000000000)) + '.png'
                             )
+        return sol  # TODO Need to improvement
