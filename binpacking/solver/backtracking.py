@@ -14,11 +14,7 @@ class Backtracking(OptimisationAlgo):
         self.backtracking(sol)
         return sol
 
-    def backtracking(self, sol: Solution, number_of_valid_items: int = 0) -> None:
-        print("test")
-        print(sol[0])
-        # self.Backtracking(sol, number_of_valid_items)
-
+    def backtracking(self, sol: Solution, number_of_valid_items: int = 0) -> Solution:
         for x in range(0, self.bin_packing.capacity.get_width_height()[0]):
             for y in range(0, self.bin_packing.capacity.get_width_height()[1]):
                 for r in [0, 90]:
@@ -36,5 +32,3 @@ class Backtracking(OptimisationAlgo):
                             plot_handler.save_to_file(
                                 'test_backtracking' + str(randint(0, 1000000000)) + '.png'
                             )
-
-        pass
