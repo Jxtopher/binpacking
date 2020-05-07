@@ -47,6 +47,15 @@ class BinPacking2DTest(BaseTestCase):
         sol[1] = Coordinate(0, 2)
         self.assertFalse(instance.has_collision(sol[0], item_a, sol[1], item_b))
 
+        # Rotation test
+        item_a = Rectangle(6, 2)
+        item_b = Rectangle(6, 2)
+        instance = BinPacking2D(Rectangle(10, 10), [item_a, item_b])
+        sol[0] = Coordinate(0, 0)
+        sol[1] = Coordinate(0, 2)
+        sol[0].rotate()
+        self.assertTrue(instance.has_collision(sol[0], item_a, sol[1], item_b))
+
     def test_has_collision_with_overlapping_rectangles(self) -> None:
         item_a = Rectangle(6, 2)
         item_b = Rectangle(2, 6)
@@ -83,6 +92,17 @@ class BinPacking2DTest(BaseTestCase):
 
         sol[0] = Coordinate(93, 93)
         self.assertTrue(instance.is_inside(sol[0], item_0))
+
+        # Rotation test
+        item_a = Rectangle(6, 2)
+        item_b = Rectangle(6, 2)
+        instance = BinPacking2D(Rectangle(6, 4), [item_a, item_b])
+        sol = Solution(instance.get_instance_size())
+        sol[0] = Coordinate(0, 0)
+        sol[1] = Coordinate(0, 2)
+        sol[0].rotate()
+        self.assertFalse(instance.is_inside(sol[0], item_a))
+        self.assertTrue(instance.is_inside(sol[1], item_b))
 
     def test_evaluate(self) -> None:
         ###################
@@ -136,4 +156,4 @@ class BinPacking2DTest(BaseTestCase):
         sol[5].rotate()
         instance.evaluate(sol)
         fitness = sol.get_fitness()
-        # self.assertNotEqual(fitness, 6.0)
+        self.assertEqual(fitness, -1.0)

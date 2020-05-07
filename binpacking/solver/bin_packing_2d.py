@@ -72,7 +72,7 @@ class BinPacking2D:
             for i, coordinate in enumerate(sol)
         )
 
-        if num_collisions > 0:
+        if num_collisions > 0 or num_outside > 0:
             sol.set_fitness(-float(num_collisions + num_outside))
         else:
             num_valid_coordinates = sum(coordinate.is_valid() for coordinate in sol)
