@@ -1,12 +1,15 @@
-from typing import List
+from typing import List, Tuple
 
 from binpacking.solver.solution import Solution, Coordinate
 
 
 class Rectangle:
     def __init__(self, width: int, height: int):
-        self.width = width
-        self.height = height
+        self._width = width
+        self._height = height
+
+    def get_width_height(self, is_rotated: bool = False) -> Tuple[int, int]:
+        return (self._height, self._width) if is_rotated else (self._width, self._height)
 
 
 class BinPacking2D:
@@ -30,20 +33,24 @@ class BinPacking2D:
         coordinate_b: Coordinate,
         item_b: Rectangle,
     ) -> bool:
+        width_a, height_a = item_a.get_width_height(coordinate_a.is_rotated)
+        width_b, height_b = item_b.get_width_height(coordinate_b.is_rotated)
         is_not_colliding = (
-            coordinate_a.x + item_a.width <= coordinate_b.x
-            or coordinate_b.x + item_b.width <= coordinate_a.x
-            or coordinate_a.y + item_a.height <= coordinate_b.y
-            or coordinate_b.y + item_b.height <= coordinate_a.y
+            coordinate_a.x + width_a <= coordinate_b.x
+            or coordinate_b.x + width_b <= coordinate_a.x
+            or coordinate_a.y + height_a <= coordinate_b.y
+            or coordinate_b.y + height_b <= coordinate_a.y
         )
         return not is_not_colliding
 
     def is_inside(self, coordinate: Coordinate, item: Rectangle) -> bool:
+        capacity_width, capacity_height = self.capacity.get_width_height()
+        width, height = item.get_width_height(coordinate.is_rotated)
         return (
             0 <= coordinate.x
-            and coordinate.x + item.width <= self.capacity.width
+            and coordinate.x + width <= capacity_width
             and 0 <= coordinate.y
-            and coordinate.y + item.height <= self.capacity.height
+            and coordinate.y + height <= capacity_height
         )
 
     def find_num_collisions(self, sol: Solution) -> int:
@@ -65,7 +72,7 @@ class BinPacking2D:
             for i, coordinate in enumerate(sol)
         )
 
-        if num_collisions > 0:
+        if num_collisions > 0 or num_outside > 0:
             sol.set_fitness(-float(num_collisions + num_outside))
         else:
             num_valid_coordinates = sum(coordinate.is_valid() for coordinate in sol)

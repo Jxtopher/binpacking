@@ -1,12 +1,16 @@
+# @brief : F. Glover, "Future paths for integer programming and links to artificial intelligence,"
+#          Computers & Operations Research, vol. 13, pp. 533-549, 1986.
+
 from typing import Deque, Callable
 from collections import deque
 import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
+from binpacking.solver.optimisation_algo import OptimisationAlgo
 
 
-class TabuSearch:
+class TabuSearch(OptimisationAlgo):
     def __init__(
         self,
         bin_packing: BinPacking2D,
@@ -32,14 +36,12 @@ class TabuSearch:
             s_prim = copy.deepcopy(s_star)
             self.find_neighborhood(self.bin_packing, s_prim)
 
-            # cpt = 0
-            # while s_prim in self.tabu_deque:
-            #     s_prim = self.find_neighborhood(s_star)
-            #     print(s_prim)
-            #     if 500 < cpt:
-            #         print(cpt)
-            #         raise Exception('[-] no more found neighbors')
-            #     cpt += 1
+            cpt = 0
+            while s_prim in self.tabu_deque:
+                self.find_neighborhood(self.bin_packing, s_prim)
+                if 500 < cpt:
+                    raise Exception('[-] no more found neighbors')
+                cpt += 1
 
             self.bin_packing.evaluate(s_prim)
 
