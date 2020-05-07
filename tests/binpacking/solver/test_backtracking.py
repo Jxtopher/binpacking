@@ -28,5 +28,3 @@ class BacktrackingTest(BaseTestCase):
 
         backtracking = Backtracking(instance)
         backtracking.run(sol)
-
-        pass
