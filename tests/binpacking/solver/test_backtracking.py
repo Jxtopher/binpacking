@@ -26,5 +26,5 @@ class BacktrackingTest(BaseTestCase):
         sol[4] = Coordinate(-1, -1)
         sol[5] = Coordinate(-1, -1)
 
-        backtracking = Backtracking(instance)
-        backtracking.run(sol)
+        # backtracking = Backtracking(instance)
+        # backtracking.run(sol)
