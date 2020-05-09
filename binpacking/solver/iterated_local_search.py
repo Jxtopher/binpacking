@@ -4,7 +4,7 @@
 #         Universitat Pompeu Fabra, https://EconPapers.repec.org/RePEc:upf:upfgen:513.
 #         (https://econ-papers.upf.edu/papers/513.pdf)
 import copy
-
+from typing import List
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
 from binpacking.solver.neighborhood import Neighborhood
@@ -19,7 +19,7 @@ class IteratedLocalSearch(OptimisationAlgo):
         self.max_iterations = max_iterations
         self.optimisation_algo = optimisation_algo
 
-    def run(self, sol: Solution) -> Solution:
+    def run(self, sol: Solution) -> List[Solution]:
         # Best known solution
         s_star = copy.deepcopy(sol)
         if not s_star.has_valid_fitness():
@@ -41,4 +41,4 @@ class IteratedLocalSearch(OptimisationAlgo):
                 print(s_star)
             iterations += 1
 
-        return s_star
+        return [s_star]
