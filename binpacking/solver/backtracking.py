@@ -27,6 +27,7 @@ class Backtracking(OptimisationAlgo):
                             valid_solutions.extend(
                                 self.backtracking(copy.deepcopy(sol), number_of_valid_items + 1)
                             )
-                    elif sol.get_fitness() == len(sol):
-                        valid_solutions.append(copy.deepcopy(sol))
+                    else:
+                        if sol.get_fitness() == len(sol):
+                            valid_solutions.append(copy.deepcopy(sol))
         return valid_solutions
