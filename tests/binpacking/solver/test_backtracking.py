@@ -2,7 +2,8 @@ from tests.base import BaseTestCase
 
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 from binpacking.solver.solution import Solution, Coordinate
-from binpacking.solver.backtracking import Backtracking
+
+# from binpacking.solver.backtracking import Backtracking
 
 
 class BacktrackingTest(BaseTestCase):
