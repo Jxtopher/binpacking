@@ -26,8 +26,8 @@ class Backtracking(OptimisationAlgo):
                     self.bin_packing.evaluate(sol)
                     if number_of_valid_items < len(sol) - 1:
                         if 0 <= sol.get_fitness():
-                            valid_solutions = self.backtracking(
-                                copy.deepcopy(sol), number_of_valid_items + 1
+                            valid_solutions.extend(
+                                self.backtracking(copy.deepcopy(sol), number_of_valid_items + 1)
                             )
                     else:
                         if sol.get_fitness() == len(sol):

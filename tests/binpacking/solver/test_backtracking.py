@@ -31,7 +31,7 @@ class BacktrackingTest(BaseTestCase):
         backtracking = Backtracking(instance)
         backtracking.run(sol)
 
-    def test_run(self) -> None:
+    def test_run1(self) -> None:
         instance = BinPacking2D(Rectangle(2, 2), [Rectangle(1, 2), Rectangle(1, 2)],)
         sol = Solution(instance.get_instance_size())
         sol[0] = Coordinate(-1, -1)
@@ -40,4 +40,5 @@ class BacktrackingTest(BaseTestCase):
         backtracking = Backtracking(instance)
         valid_solutions = backtracking.run(sol)
         print("xxxxxxx")
-        print(valid_solutions)
+        for i in valid_solutions:
+            print(valid_solutions[i])

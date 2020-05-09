@@ -1,7 +1,7 @@
 # @brief : F. Glover, "Future paths for integer programming and links to artificial intelligence,"
 #          Computers & Operations Research, vol. 13, pp. 533-549, 1986.
 
-from typing import Deque, Callable
+from typing import Deque, Callable, List
 from collections import deque
 import copy
 
@@ -24,7 +24,7 @@ class TabuSearch(OptimisationAlgo):
         self.find_neighborhood = find_neighborhood
         self.tabu_deque: Deque[Solution] = deque(maxlen=self.tabu_size)
 
-    def run(self, sol: Solution) -> Solution:
+    def run(self, sol: Solution) -> List[Solution]:
         # Best known solution
         s_star = copy.deepcopy(sol)
         if not s_star.has_valid_fitness():
