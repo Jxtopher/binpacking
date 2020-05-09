@@ -1,6 +1,6 @@
 # Bin Packing 2D
 
-[![CircleCI](https://circleci.com/gh/david-sk/binpacking.svg?style=svg&circle-token=70de38360fc5aa8e02f50443a377512bec444ce1)](https://app.circleci.com/pipelines/github/david-sk/binpacking/)
+[![CircleCI](https://circleci.com/gh/Jxtopher/binpacking.svg?style=svg&circle-token=70de38360fc5aa8e02f50443a377512bec444ce1)](https://app.circleci.com/pipelines/github/Jxtopher/binpacking/)
 
 Bin Packing, using optimization to solve the problem!
 
