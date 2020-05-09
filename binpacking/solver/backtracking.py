@@ -1,5 +1,6 @@
 import copy
 from random import randint
+from typing import List
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution, Coordinate
 from binpacking.solver.optimisation_algo import OptimisationAlgo
@@ -14,8 +15,9 @@ class Backtracking(OptimisationAlgo):
         self.backtracking(sol)
         return sol
 
-    def backtracking(self, sol: Solution, number_of_valid_items: int = 0) -> Solution:
+    def backtracking(self, sol: Solution, number_of_valid_items: int = 0) -> List[Solution]:
         width, height = self.bin_packing.capacity.get_width_height()
+        valide_solutions: List[Solution] = []
         for x in range(width):
             for y in range(height):
                 for r in [0, 90]:
@@ -24,12 +26,15 @@ class Backtracking(OptimisationAlgo):
                     self.bin_packing.evaluate(sol)
                     if number_of_valid_items < len(sol) - 1:
                         if 0 <= sol.get_fitness():
-                            self.backtracking(copy.deepcopy(sol), number_of_valid_items + 1)
+                            valide_solutions = self.backtracking(
+                                copy.deepcopy(sol), number_of_valid_items + 1
+                            )
                     else:
                         if sol.get_fitness() == len(sol):
+                            valide_solutions.append(sol)
                             print(sol)
                             plot_handler = PlotHandler(self.bin_packing, sol)
                             plot_handler.save_to_file(
                                 'test_backtracking' + str(randint(0, 1000000000)) + '.png'
                             )
-        return sol  # TODO Need to improvement
+        return valide_solutions  # TODO Need to improvement
