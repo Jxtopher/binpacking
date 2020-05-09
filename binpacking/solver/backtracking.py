@@ -16,8 +16,8 @@ class Backtracking(OptimisationAlgo):
 
     def backtracking(self, sol: Solution, number_of_valid_items: int = 0) -> Solution:
         width, height = self.bin_packing.capacity.get_width_height()
-        for x in range(0, width):
-            for y in range(0, height):
+        for x in range(width):
+            for y in range(height):
                 for r in [0, 90]:
                     sol[number_of_valid_items] = Coordinate(x, y)
                     if r == 90:
