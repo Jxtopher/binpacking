@@ -3,10 +3,11 @@ from tests.base import BaseTestCase
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 from binpacking.solver.solution import Solution, Coordinate
 
-# from binpacking.solver.backtracking import Backtracking
+from binpacking.solver.backtracking import Backtracking
 
 
 class BacktrackingTest(BaseTestCase):
+    @BaseTestCase.timeConsumingTest()
     def test_run(self) -> None:
         instance = BinPacking2D(
             Rectangle(100, 100),
@@ -27,5 +28,5 @@ class BacktrackingTest(BaseTestCase):
         sol[4] = Coordinate(-1, -1)
         sol[5] = Coordinate(-1, -1)
 
-        # backtracking = Backtracking(instance)
-        # backtracking.run(sol)
+        backtracking = Backtracking(instance)
+        backtracking.run(sol)
