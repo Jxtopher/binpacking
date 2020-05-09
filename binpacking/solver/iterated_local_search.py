@@ -41,4 +41,4 @@ class IteratedLocalSearch(OptimisationAlgo):
                 print(s_star)
             iterations += 1
 
-        return s_star
+        return [s_star]

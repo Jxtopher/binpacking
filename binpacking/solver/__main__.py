@@ -30,9 +30,10 @@ if __name__ == '__main__':
         bin_packing, tabu_size, max_iterations, getattr(Neighborhood, 'find_one_mutation_neighbor')
     )
 
-    s_star = ts.run(sol_init)
-    print('best solution')
-    print(s_star)
+    solutions = ts.run(sol_init)
+    print('best solutions')
+    print(solutions)
 
-    plot_handler = PlotHandler(bin_packing, s_star)
-    results_filepath = plot_handler.save_to_file('cool_plot.png')
+    for i, solution in enumerate(solutions):
+        plot_handler = PlotHandler(bin_packing, solution)
+        results_filepath = plot_handler.save_to_file(f'cool_plot_{i}_.png')

@@ -53,4 +53,4 @@ class TabuSearch(OptimisationAlgo):
             self.tabu_deque.append(s_prim)
 
             iterations += 1
-        return s_star
+        return [s_star]
