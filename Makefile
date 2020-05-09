@@ -70,5 +70,7 @@ run-solver:
 # Running tests
 
 test: TARGET ?= discover
+test: TIME_CONSUMING ?= 0
 test: # TARGET can be a path, as this replaces "/" by "." and ending ".py" by nothing
-	$(PIPENV_RUN) python -m unittest $(patsubst %.py,%,$(subst /,.,$(TARGET))) $(ARGS)
+	RUN_TIME_CONSUMING_TESTS=$(TIME_CONSUMING) \
+		$(PIPENV_RUN) python -m unittest $(patsubst %.py,%,$(subst /,.,$(TARGET))) $(ARGS)
