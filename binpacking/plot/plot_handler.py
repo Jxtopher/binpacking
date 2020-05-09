@@ -61,4 +61,5 @@ class PlotHandler:
         figure = self._process()
         results_filepath = path.join(results_folder, filename)
         figure.savefig(results_filepath, dpi=90, bbox_inches='tight')
+        plt.close()
         return results_filepath
