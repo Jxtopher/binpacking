@@ -20,8 +20,7 @@ class Backtracking(OptimisationAlgo):
             for y in range(height):
                 for r in [0, 90]:
                     sol[number_of_valid_items] = Coordinate(x, y)
-                    if r == 90:
-                        sol[number_of_valid_items].rotate()
+                    sol[number_of_valid_items].set_is_rotated(r == 90)
                     self.bin_packing.evaluate(sol)
                     if number_of_valid_items < len(sol) - 1:
                         if 0 <= sol.get_fitness():
