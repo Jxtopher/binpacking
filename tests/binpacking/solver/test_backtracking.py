@@ -8,7 +8,7 @@ from binpacking.solver.backtracking import Backtracking
 
 class BacktrackingTest(BaseTestCase):
     @BaseTestCase.timeConsumingTest()
-    def test_run(self) -> None:
+    def test_run_big_instance(self) -> None:
         instance = BinPacking2D(
             Rectangle(100, 100),
             [
@@ -31,7 +31,7 @@ class BacktrackingTest(BaseTestCase):
         backtracking = Backtracking(instance)
         backtracking.run(sol)
 
-    def test_run1(self) -> None:
+    def test_run_small_instance(self) -> None:
         instance = BinPacking2D(Rectangle(2, 2), [Rectangle(1, 2), Rectangle(1, 2)],)
         sol = Solution(instance.get_instance_size())
         sol[0] = Coordinate(-1, -1)
@@ -39,6 +39,15 @@ class BacktrackingTest(BaseTestCase):
 
         backtracking = Backtracking(instance)
         valid_solutions = backtracking.run(sol)
-        print("xxxxxxx")
-        for i in valid_solutions:
-            print(valid_solutions[i])
+
+        self.assertEqual(
+            str(valid_solutions),
+            str(
+                [
+                    [(0, 0, 0), (1, 0, 0)],
+                    [(0, 0, 90), (0, 1, 90)],
+                    [(0, 1, 90), (0, 0, 90)],
+                    [(1, 0, 0), (0, 0, 0)],
+                ]
+            ),
+        )
