@@ -18,8 +18,6 @@ class Budget(Criterion):
         self.iteration = 0
 
     def run(self, sol: Solution) -> bool:
-        print("X")
-        print(self.iteration)
         self.iteration += 1
         return self.iteration - 1 < self.max_iterations
 
