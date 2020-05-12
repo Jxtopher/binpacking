@@ -12,7 +12,7 @@ class Statistic:
         pass
 
 
-class Iteration(Statistic):
+class StatisticIteration(Statistic):
     def __init__(self) -> None:
         self.iteration = 0
 
@@ -21,16 +21,21 @@ class Iteration(Statistic):
         return {'iteration': self.iteration - 1}
 
 
-class Fitness(Statistic):
+class StatisticFitness(Statistic):
     def run(self, sol: Solution) -> Dict[str, float]:
         return {'fitness': sol.get_fitness()}
+
+
+class StatisticSolution(Statistic):
+    def run(self, sol: Solution) -> Dict[str, str]:
+        return {'sol': sol.__str__()}
 
 
 class Statistics:
     def __init__(self) -> None:
         self.statistics: List[Statistic] = []
 
-    def run(self, sol: Solution) -> Dict[str, float]:
+    def run(self, sol: Solution) -> Dict[str, Any]:
         result: Dict[str, Any] = {}
         for statistic in self.statistics:
             result.update(statistic.run(sol))

@@ -6,6 +6,8 @@
 import copy
 from typing import List
 from binpacking.solver.bin_packing_2d import BinPacking2D
+from binpacking.solver.statistics import Statistics
+from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.solution import Solution
 from binpacking.solver.neighborhood import Neighborhood
 from binpacking.solver.optimisation_algo import OptimisationAlgo
@@ -13,10 +15,15 @@ from binpacking.solver.optimisation_algo import OptimisationAlgo
 
 class IteratedLocalSearch(OptimisationAlgo):
     def __init__(
-        self, bin_packing: BinPacking2D, max_iterations: int, optimisation_algo: OptimisationAlgo
+        self,
+        bin_packing: BinPacking2D,
+        statistics: Statistics,
+        stop_criteria: StopCriteria,
+        optimisation_algo: OptimisationAlgo,
     ):
         self.bin_packing = bin_packing
-        self.max_iterations = max_iterations
+        self.statistics = statistics
+        self.stop_criteria = stop_criteria
         self.optimisation_algo = optimisation_algo
 
     def run(self, sol: Solution) -> List[Solution]:
@@ -25,10 +32,8 @@ class IteratedLocalSearch(OptimisationAlgo):
         if not s_star.has_valid_fitness():
             self.bin_packing.evaluate(s_star)
 
-        iterations = 0
-
         # while the stop criteria isn't reached
-        while iterations < self.max_iterations:
+        while self.stop_criteria.run(s_star):
             s_prim = copy.deepcopy(s_star)
             Neighborhood.find_random_neighbor(self.bin_packing, s_prim)
             self.optimisation_algo.run(s_prim)
@@ -38,7 +43,8 @@ class IteratedLocalSearch(OptimisationAlgo):
 
             if s_star.get_fitness() < s_prim.get_fitness():
                 s_star = copy.deepcopy(s_prim)
-                print(s_star)
-            iterations += 1
+                to_print = self.statistics.run(s_star)
+                if bool(to_print):
+                    print(to_print)
 
         return [s_star]

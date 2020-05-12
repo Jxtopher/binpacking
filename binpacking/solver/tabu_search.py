@@ -5,6 +5,8 @@ from typing import Deque, Callable, List
 from collections import deque
 import copy
 
+from binpacking.solver.statistics import Statistics
+from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
 from binpacking.solver.optimisation_algo import OptimisationAlgo
@@ -14,11 +16,15 @@ class TabuSearch(OptimisationAlgo):
     def __init__(
         self,
         bin_packing: BinPacking2D,
+        statistics: Statistics,
+        stop_criteria: StopCriteria,
         tabu_size: int,
         max_iterations: int,
         find_neighborhood: Callable[[BinPacking2D, Solution], None],
     ):
         self.bin_packing = bin_packing
+        self.statistics = statistics
+        self.stop_criteria = stop_criteria
         self.tabu_size = tabu_size
         self.max_iterations = max_iterations
         self.find_neighborhood = find_neighborhood
@@ -30,9 +36,8 @@ class TabuSearch(OptimisationAlgo):
         if not s_star.has_valid_fitness():
             self.bin_packing.evaluate(s_star)
 
-        iterations = 0
         # while the stop criteria isn't reached
-        while iterations < self.max_iterations:
+        while self.stop_criteria.run(s_star):
             s_prim = copy.deepcopy(s_star)
             self.find_neighborhood(self.bin_packing, s_prim)
 
@@ -48,9 +53,10 @@ class TabuSearch(OptimisationAlgo):
             # mimi ou maximi
             if s_star.get_fitness() < s_prim.get_fitness():
                 s_star = copy.deepcopy(s_prim)
-                print(s_star)
+                to_print = self.statistics.run(s_star)
+                if bool(to_print):
+                    print(to_print)
 
             self.tabu_deque.append(s_prim)
 
-            iterations += 1
         return [s_star]
