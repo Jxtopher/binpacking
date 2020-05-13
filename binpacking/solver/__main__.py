@@ -1,5 +1,7 @@
 import argparse
 
+from binpacking.solver.statistics import Statistics, StatisticSolution, StatisticFitness
+from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
 from binpacking.solver.tabu_search import TabuSearch
@@ -24,10 +26,21 @@ if __name__ == '__main__':
     bin_packing = InstanceLoader.get_bin_packing(args.instance)
     sol_init = Solution(bin_packing.get_instance_size())
 
+    statistics = Statistics()
+    statistics.add_statistic(StatisticFitness())
+    statistics.add_statistic(StatisticSolution())
+    stop_criteria = StopCriteria()
+    stop_criteria.add_criterion(CriterionBudget(args.max_iterations))
+
     tabu_size = 5
     max_iterations = args.max_iterations
     ts = TabuSearch(
-        bin_packing, tabu_size, max_iterations, getattr(Neighborhood, 'find_one_mutation_neighbor')
+        bin_packing,
+        statistics,
+        stop_criteria,
+        tabu_size,
+        max_iterations,
+        getattr(Neighborhood, 'find_one_mutation_neighbor'),
     )
 
     solutions = ts.run(sol_init)

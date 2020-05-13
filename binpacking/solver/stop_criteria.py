@@ -12,7 +12,7 @@ class Criterion:
         pass
 
 
-class Budget(Criterion):
+class CriterionBudget(Criterion):
     def __init__(self, max_iterations: int):
         self.max_iterations = max_iterations
         self.iteration = 0

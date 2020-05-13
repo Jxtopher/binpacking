@@ -1,13 +1,13 @@
 from tests.base import BaseTestCase
 
 from binpacking.solver.solution import Solution
-from binpacking.solver.statistic import Statistics, Iteration, Fitness
+from binpacking.solver.statistics import Statistics, StatisticIteration, StatisticFitness
 
 
 class StatisticsTest(BaseTestCase):
     def test_statistics(self) -> None:
-        iteration = Iteration()
-        fitness = Fitness()
+        iteration = StatisticIteration()
+        fitness = StatisticFitness()
         statistics = Statistics()
         statistics.add_statistic(iteration)
         statistics.add_statistic(fitness)

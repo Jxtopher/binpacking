@@ -1,5 +1,7 @@
 from tests.base import BaseTestCase
 
+from binpacking.solver.statistics import Statistics
+from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 from binpacking.solver.solution import Solution, Coordinate
 
@@ -28,7 +30,10 @@ class BacktrackingTest(BaseTestCase):
         sol[4] = Coordinate(-1, -1)
         sol[5] = Coordinate(-1, -1)
 
-        backtracking = Backtracking(instance)
+        statistics = Statistics()
+        stop_criteria = StopCriteria()
+
+        backtracking = Backtracking(instance, statistics, stop_criteria)
         backtracking.run(sol)
 
     def test_run_small_instance(self) -> None:
@@ -37,7 +42,10 @@ class BacktrackingTest(BaseTestCase):
         sol[0] = Coordinate(-1, -1)
         sol[1] = Coordinate(-1, -1)
 
-        backtracking = Backtracking(instance)
+        statistics = Statistics()
+        stop_criteria = StopCriteria()
+
+        backtracking = Backtracking(instance, statistics, stop_criteria)
         valid_solutions = backtracking.run(sol)
 
         self.assertEqual(
