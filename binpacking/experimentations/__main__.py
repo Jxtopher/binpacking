@@ -45,8 +45,8 @@ colorcycler = cycle(colors)
 if __name__ == '__main__':
     exp = ExpBacktracking()
 
-    number_of_runs = 8
-    list_of_budget = range(100, 1050, 50)
+    number_of_runs = 32
+    list_of_budget = range(100, 2050, 50)
 
     resultats: Dict[int, List[float]] = {}
     for budget in list_of_budget:
