@@ -1,4 +1,4 @@
-from random import randint, random
+from random import randint
 from typing import List
 import copy
 
@@ -52,12 +52,14 @@ class Backtracking(OptimisationAlgo):
                             valid_solutions.append(copy.deepcopy(sol))
         return valid_solutions
 
-    def run_randomize(self, sol: Solution, number_of_valid_items: int = 0) -> List[Solution]:
+    def run_randomize(
+        self, sol: Solution, number_of_valid_items: int = 0, max_branches_explore: int = 50
+    ) -> List[Solution]:
         width, height = self.bin_packing.capacity.get_width_height()
         valid_solutions: List[Solution] = []
 
-        iteration = 0
-        while iteration < 10000:
+        branches_explore = 0
+        while branches_explore < max_branches_explore:
             x = randint(0, width)
             y = randint(0, height)
             r = randint(0, 1)
@@ -66,10 +68,8 @@ class Backtracking(OptimisationAlgo):
             sol[number_of_valid_items].set_is_rotated(bool(r))
             self.bin_packing.evaluate(sol)
             if number_of_valid_items < len(sol) - 1 and self.stop_criteria.run(sol):
-                to_print = self.statistics.run(sol)
-                if to_print:
-                    print(to_print)
                 if 0 <= sol.get_fitness():
+                    self.statistics.run(sol)
                     valid_solutions.extend(
                         self.run_randomize(copy.deepcopy(sol), number_of_valid_items + 1)
                     )
@@ -79,5 +79,5 @@ class Backtracking(OptimisationAlgo):
                     if to_print:
                         print(to_print)
                     valid_solutions.append(copy.deepcopy(sol))
-            iteration += 1
+            branches_explore += 1
         return valid_solutions

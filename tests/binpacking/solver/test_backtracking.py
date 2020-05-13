@@ -42,10 +42,7 @@ class BacktrackingTest(BaseTestCase):
         stop_criteria = StopCriteria()
         stop_criteria.add_criterion(CriterionBudget(500))
 
-        # backtracking = Backtracking(instance, statistics, stop_criteria)
-        # backtracking.run(sol)
-
-        backtracking = Backtracking(instance, statistics, stop_criteria, True)
+        backtracking = Backtracking(instance, statistics, stop_criteria)
         backtracking.run(sol)
 
     def test_run_small_instance(self) -> None:

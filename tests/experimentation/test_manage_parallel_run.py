@@ -1,7 +1,7 @@
 from statistics import mean
 from tests.base import BaseTestCase
 
-from experimentation.manage_parallel_run import ManageParallelRun
+from binpacking.experimentations.manage_parallel_run import ManageParallelRun
 
 
 class ManageParallelRunTest(BaseTestCase):
