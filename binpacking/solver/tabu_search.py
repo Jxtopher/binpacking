@@ -54,7 +54,7 @@ class TabuSearch(OptimisationAlgo):
             if s_star.get_fitness() < s_prim.get_fitness():
                 s_star = copy.deepcopy(s_prim)
                 to_print = self.statistics.run(s_star)
-                if bool(to_print):
+                if to_print:
                     print(to_print)
 
             self.tabu_deque.append(s_prim)

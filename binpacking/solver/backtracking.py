@@ -36,7 +36,7 @@ class Backtracking(OptimisationAlgo):
                     else:
                         if sol.get_fitness() == len(sol):
                             to_print = self.statistics.run(sol)
-                            if bool(to_print):
+                            if to_print:
                                 print(to_print)
                             valid_solutions.append(copy.deepcopy(sol))
         return valid_solutions

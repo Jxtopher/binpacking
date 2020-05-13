@@ -28,7 +28,7 @@ class StatisticFitness(Statistic):
 
 class StatisticSolution(Statistic):
     def run(self, sol: Solution) -> Dict[str, str]:
-        return {'sol': sol.__str__()}
+        return {'sol': str(sol)}
 
 
 class Statistics:
