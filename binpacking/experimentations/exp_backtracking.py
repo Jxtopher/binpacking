@@ -6,7 +6,6 @@ from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
 from binpacking.solver.backtracking import Backtracking
-from binpacking.experimentations.experimentations import Experimentations
 
 
 class ExpBacktracking:
