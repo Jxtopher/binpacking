@@ -4,17 +4,23 @@ from typing import List, Optional
 class Coordinate:
     INVALID_COORDINATE = (-1, -1)
 
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int, is_rotated: bool = False):
         self.x = x
         self.y = y
-        self.is_rotated = False
+        self.is_rotated = is_rotated
 
     def __repr__(self) -> str:
         return f'({self.x}, {self.y}, {90 if self.is_rotated else 0})'
 
     def __eq__(self, other: object) -> bool:
-        assert isinstance(other, Coordinate)
-        return self.x == other.x and self.y == other.y and self.is_rotated == other.is_rotated
+        return (
+            isinstance(other, Coordinate)
+            and (self.x == other.x and self.y == other.y)
+            and self.is_rotated == other.is_rotated
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.x, self.y, self.is_rotated))
 
     def is_valid(self) -> bool:
         return (self.x, self.y) != self.INVALID_COORDINATE
