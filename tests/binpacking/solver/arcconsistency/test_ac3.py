@@ -24,11 +24,4 @@ class AC3Test(BaseTestCase):
 
         ac3 = AC3(instance)
         domains = ac3.run(sol)
-        self.assertEqual(
-            domains,
-            {
-                0: set([Coordinate(-1, -1)]),
-                1: set([Coordinate(-1, -1)]),
-                2: set([Coordinate(-1, -1)]),
-            },
-        )
+        self.assertEqual(sum(len(sub_domain) for sub_domain in domains.values()), 251)
