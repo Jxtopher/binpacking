@@ -1,7 +1,7 @@
 from tests.base import BaseTestCase
 
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
-from binpacking.solver.solution import Solution, Coordinate
+from binpacking.solver.solution import Solution
 from binpacking.solver.arcconsistency.ac3 import AC3
 
 
