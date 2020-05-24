@@ -11,7 +11,7 @@ class AC3:
     def __init__(self, bin_packing: BinPacking2D):
         self.bin_packing = bin_packing
 
-    def run(self, sol: Solution) -> DomainsType:
+    def run(self, sol: Solution, accept_invalid_coordinates: bool = True) -> DomainsType:
         width, height = self.bin_packing.capacity.get_width_height()
 
         domains = {
@@ -23,14 +23,15 @@ class AC3:
             )
             for i in range(len(sol))
         }
-        for i in range(len(sol)):
-            domains[i].add(Coordinate(*Coordinate.INVALID_COORDINATE))
+        if accept_invalid_coordinates:
+            for i in range(len(sol)):
+                domains[i].add(Coordinate(*Coordinate.INVALID_COORDINATE))
 
         self.ac3(sol, domains)
 
         return domains
 
-    def ac3(self, sol: Solution, domains: DomainsType, number_of_valid_items: int = 0) -> None:
+    def ac3(self, sol: Solution, domains: DomainsType) -> None:
         for i in range(len(sol)):
             domains[i] -= set(
                 vx
@@ -49,7 +50,7 @@ class AC3:
                     if len(domains[i]) == 0:
                         raise Exception('Total kaput!')
                     else:
-                        worklist.union(
+                        worklist = worklist.union(
                             set((i, j) for j in range(len(sol)) if j != i and j != arc[1])
                         )
 
