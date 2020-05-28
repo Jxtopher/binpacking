@@ -1,7 +1,6 @@
-from typing import Tuple, Set, Dict
-
+from typing import Tuple
 from binpacking.solver.bin_packing_2d import BinPacking2D
-from binpacking.solver.solution import Solution, Coordinate
+from binpacking.solver.solution import Solution
 from binpacking.solver.domain import DomainsType
 
 
