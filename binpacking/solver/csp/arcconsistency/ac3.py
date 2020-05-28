@@ -2,9 +2,7 @@ from typing import Tuple, Set, Dict
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution, Coordinate
-
-
-DomainsType = Dict[int, Set[Coordinate]]
+from binpacking.solver.domain import DomainsType
 
 
 class AC3:
@@ -13,22 +11,8 @@ class AC3:
 
     def run(self, sol: Solution, accept_invalid_coordinates: bool = True) -> DomainsType:
         width, height = self.bin_packing.capacity.get_width_height()
-
-        domains = {
-            i: set(
-                Coordinate(x, y, rotation == 90)
-                for rotation in (0, 90)
-                for x in range(width)
-                for y in range(height)
-            )
-            for i in range(len(sol))
-        }
-        if accept_invalid_coordinates:
-            for i in range(len(sol)):
-                domains[i].add(Coordinate(*Coordinate.INVALID_COORDINATE))
-
+        domains = DomainsType(self.bin_packing)
         self.ac3(sol, domains)
-
         return domains
 
     def ac3(self, sol: Solution, domains: DomainsType) -> None:
