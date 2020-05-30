@@ -9,7 +9,7 @@ from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.solution import Solution
-from binpacking.solver.neighborhood import Neighborhood
+from binpacking.solver.metaheuristic.neighborhood import Neighborhood
 from binpacking.solver.optimisation_algo import OptimisationAlgo
 
 
