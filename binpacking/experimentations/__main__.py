@@ -1,10 +1,11 @@
-from numpy import mean
 from typing import List, Dict
-from binpacking.experimentations.exp_backtracking import ExpBacktracking
 from itertools import cycle
-import matplotlib
-from binpacking.experimentations.manage_parallel_run import ManageParallelRun
 
+from numpy import mean
+import matplotlib.pyplot as plt
+
+from binpacking.experimentations.exp_backtracking import ExpBacktracking
+from binpacking.experimentations.manage_parallel_run import ManageParallelRun
 
 # Colors, markers and lines
 lines = ["-"]  # ,"--","-.",":"]
@@ -43,23 +44,22 @@ markercycler = cycle(markers)
 colorcycler = cycle(colors)
 
 if __name__ == '__main__':
+    matplotlib.use('Agg')
+    
     exp = ExpBacktracking()
 
     number_of_runs = 32
     list_of_budget = range(100, 2050, 50)
 
-    resultats: Dict[int, List[float]] = {}
+    results: Dict[int, List[float]] = {}
     for budget in list_of_budget:
         args = [budget] * number_of_runs
-        resultats[budget] = ManageParallelRun.run_parallel(exp.run, args, ret=True)
+        results[budget] = ManageParallelRun.run_parallel(exp.run, args, ret=True)
 
-    print(resultats)
+    print(results)
     y: List[float] = []
     for budget in list_of_budget:
-        y.append(mean(resultats[budget]))
-
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
+        y.append(mean(results[budget]))
 
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.margins(0.1)
