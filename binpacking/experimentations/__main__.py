@@ -2,6 +2,7 @@ from typing import List, Dict
 from itertools import cycle
 
 from numpy import mean
+import matplotlib
 import matplotlib.pyplot as plt
 
 from binpacking.experimentations.exp_backtracking import ExpBacktracking
@@ -46,7 +47,7 @@ colorcycler = cycle(colors)
 if __name__ == '__main__':
     # TODO: Need to look into "Agg" !
     matplotlib.use('Agg')
-    
+
     exp = ExpBacktracking()
 
     number_of_runs = 32
