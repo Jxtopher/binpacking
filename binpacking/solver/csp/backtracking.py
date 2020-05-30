@@ -34,8 +34,6 @@ class Backtracking:
             valid_solutions.append(valid_sol)
             return valid_solutions
 
-        print(domains)
-
         width, height = self.bin_packing.capacity.get_width_height()
         for sol_index, domain in domains.items():
             if len(domain) == 1:
