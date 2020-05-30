@@ -4,9 +4,9 @@ from binpacking.solver.statistics import Statistics, StatisticSolution, Statisti
 from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
-from binpacking.solver.tabu_search import TabuSearch
-from binpacking.solver.neighborhood import Neighborhood
 from binpacking.plot.plot_handler import PlotHandler
+from binpacking.solver.metaheuristic.tabu_search import TabuSearch
+from binpacking.solver.metaheuristic.neighborhood import Neighborhood
 
 
 if __name__ == '__main__':
