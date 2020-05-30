@@ -10,7 +10,7 @@ from binpacking.solver.backtracking import Backtracking
 
 class ExpBacktracking:
     def run(self, budget: int, max_branches_explore: int = 50) -> float:
-        instance = InstanceLoader.get_bin_packing("binpacking2d-90-1.json")
+        instance = InstanceLoader.get_bin_packing('binpacking2d-90-1.json')
         sol_init = Solution(instance.get_instance_size())
 
         statistics = Statistics()

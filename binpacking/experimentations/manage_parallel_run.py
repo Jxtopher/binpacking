@@ -16,7 +16,7 @@ class ManageParallelRun:
     # run_function	the function to be performed
     # cmds_exec	list of function arguments
     # number_of_processes Number of processes to use
-    # stdout	"" ->  stdout | "data.log" output file
+    # stdout	'' ->  stdout | 'data.log' output file
     # ret		False -> not retrieve the outputs of the run_worker function
     @staticmethod
     def run_parallel(
