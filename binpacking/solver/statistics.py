@@ -31,6 +31,18 @@ class StatisticSolution(Statistic):
         return {'sol': str(sol)}
 
 
+class StatisticSolStar(Statistic):
+    def __init__(self) -> None:
+        self.sol_star: Solution = Solution(1)
+
+    def run(self, sol: Solution) -> Dict[str, Solution]:
+        if not self.sol_star.has_valid_fitness():
+            self.sol_star = copy.deepcopy(sol)
+        elif self.sol_star.get_fitness() < sol.get_fitness():
+            self.sol_star = copy.deepcopy(sol)
+        return {'sol_star': self.sol_star}
+
+
 class Statistics:
     def __init__(self) -> None:
         self.statistics: List[Statistic] = []

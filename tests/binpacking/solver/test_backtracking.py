@@ -1,7 +1,12 @@
 from tests.base import BaseTestCase
 
-from binpacking.solver.statistics import Statistics
-from binpacking.solver.stop_criteria import StopCriteria
+from binpacking.solver.statistics import (
+    Statistics,
+    StatisticSolution,
+    StatisticFitness,
+    StatisticIteration,
+)
+from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 from binpacking.solver.solution import Solution, Coordinate
 
@@ -31,7 +36,11 @@ class BacktrackingTest(BaseTestCase):
         sol[5] = Coordinate(-1, -1)
 
         statistics = Statistics()
+        statistics.add_statistic(StatisticIteration())
+        statistics.add_statistic(StatisticFitness())
+        statistics.add_statistic(StatisticSolution())
         stop_criteria = StopCriteria()
+        stop_criteria.add_criterion(CriterionBudget(500))
 
         backtracking = Backtracking(instance, statistics, stop_criteria)
         backtracking.run(sol)
