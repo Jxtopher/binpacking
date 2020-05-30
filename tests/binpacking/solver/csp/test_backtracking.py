@@ -11,7 +11,7 @@ from binpacking.solver.domains import Domains
 class BacktrackingTest(BaseTestCase):
     def test_backtracking(self) -> None:
         instance = BinPacking2D(
-            Rectangle(2, 2), [Rectangle(1, 1), Rectangle(1, 1), Rectangle(1, 1)],
+            Rectangle(2, 2), [Rectangle(2, 1), Rectangle(1, 1), Rectangle(1, 1)],
         )
         sol = Solution(instance.get_instance_size())
 
@@ -21,4 +21,17 @@ class BacktrackingTest(BaseTestCase):
         stop_criteria = StopCriteria()
 
         backtracking = Backtracking(instance, statistics, stop_criteria)
-        backtracking.run(sol, domains)
+        valid_solutions = backtracking.run(sol, domains)
+
+        self.assertEqual(len(valid_solutions), 133)
+
+        for valid_solution in valid_solutions:
+            instance.evaluate(valid_solution)
+            self.assertTrue(valid_solution.get_fitness() >= 0)
+
+        self.assertTrue(
+            any(
+                valid_solution.get_fitness() == instance.get_instance_size()
+                for valid_solution in valid_solutions
+            )
+        )
