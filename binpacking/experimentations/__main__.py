@@ -44,6 +44,7 @@ markercycler = cycle(markers)
 colorcycler = cycle(colors)
 
 if __name__ == '__main__':
+    # TODO: Need to look into "Agg" !
     matplotlib.use('Agg')
     
     exp = ExpBacktracking()
