@@ -21,7 +21,7 @@ class Backtracking:
     def run(self, sol: Solution, domains: Domains) -> List[Solution]:
         valid_solutions: List[Solution] = []
 
-        self.ac3.ac3(sol, domains)
+        self.ac3.run(sol, domains)
 
         for domain in domains.values():
             if len(domain) == 0:

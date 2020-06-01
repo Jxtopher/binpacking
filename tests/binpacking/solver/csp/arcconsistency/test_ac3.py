@@ -14,7 +14,8 @@ class AC3Test(BaseTestCase):
         sol = Solution(instance.get_instance_size())
 
         ac3 = AC3(instance)
-        domains = ac3.run(sol)
+        domains = Domains(instance)
+        ac3.run(sol, domains)
         self.assertEqual(sum(len(sub_domain) for sub_domain in domains.values()), 27767)
 
     def test_ac3_without_all_fitting_inputs(self) -> None:
@@ -24,7 +25,8 @@ class AC3Test(BaseTestCase):
         sol = Solution(instance.get_instance_size())
 
         ac3 = AC3(instance)
-        domains = ac3.run(sol)
+        domains = Domains(instance)
+        ac3.run(sol, domains)
         self.assertEqual(sum(len(sub_domain) for sub_domain in domains.values()), 127)
 
     def test_ac3_with_all_fitting_inputs_2(self) -> None:
@@ -35,6 +37,6 @@ class AC3Test(BaseTestCase):
 
         ac3 = AC3(instance)
         domains = Domains(instance)
-        ac3.ac3(sol, domains)
+        ac3.run(sol, domains)
 
         self.assertEqual(sum(len(sub_domain) for sub_domain in domains.values()), 27767)

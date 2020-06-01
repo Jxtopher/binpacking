@@ -8,13 +8,7 @@ class AC3:
     def __init__(self, bin_packing: BinPacking2D):
         self.bin_packing = bin_packing
 
-    def run(self, sol: Solution, accept_invalid_coordinates: bool = True) -> Domains:
-        width, height = self.bin_packing.capacity.get_width_height()
-        domains = Domains(self.bin_packing, accept_invalid_coordinates=accept_invalid_coordinates)
-        self.ac3(sol, domains)
-        return domains
-
-    def ac3(self, sol: Solution, domains: Domains) -> None:
+    def run(self, sol: Solution, domains: Domains) -> None:
         for i in range(len(sol)):
             domains[i] -= set(
                 vx
