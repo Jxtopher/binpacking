@@ -23,7 +23,7 @@ class BacktrackingTest(BaseTestCase):
         backtracking = Backtracking(instance, statistics, stop_criteria)
         valid_solutions = backtracking.run(sol, domains)
 
-        self.assertEqual(len(valid_solutions), 133)
+        self.assertEqual(len(valid_solutions), 49)
 
         for valid_solution in valid_solutions:
             instance.evaluate(valid_solution)
@@ -35,3 +35,10 @@ class BacktrackingTest(BaseTestCase):
                 for valid_solution in valid_solutions
             )
         )
+
+        number_of_solutions = 0
+        for valid_solution in valid_solutions:
+            if valid_solution.get_fitness() == instance.get_instance_size():
+                number_of_solutions += 1
+                print(valid_solution)
+        self.assertEqual(number_of_solutions, 8)
