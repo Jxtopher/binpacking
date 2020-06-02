@@ -55,10 +55,10 @@ class BacktrackingTest(BaseTestCase):
 
         for valid_solution in valid_solutions:
             instance.evaluate(valid_solution)
-            # self.assertTrue(valid_solution.get_fitness() >= 0)
+            self.assertTrue(valid_solution.get_fitness() >= 0)
 
-        number_of_solutions = 0
-        for valid_solution in valid_solutions:
-            if valid_solution.get_fitness() == instance.get_instance_size():
-                number_of_solutions += 1
+        number_of_solutions = sum(
+            valid_solution.get_fitness() == instance.get_instance_size()
+            for valid_solution in valid_solutions
+        )
         self.assertEqual(number_of_solutions, 8)

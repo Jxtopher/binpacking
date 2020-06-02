@@ -56,11 +56,7 @@ class Backtracking:
             pick_domains = stack.pop()
             self.ac3.run(pick_domains)
 
-            state = False
-            for domain in domains.values():
-                if len(domain) == 0:
-                    state = True
-            if state:
+            if any(len(domain) == 0 for domain in domains.values()):
                 continue
 
             if all(len(domain) == 1 for domain in pick_domains.values()):
