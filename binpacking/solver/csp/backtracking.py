@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List
 import copy
 
@@ -34,7 +35,6 @@ class Backtracking:
             valid_solutions.append(valid_sol)
             return valid_solutions
 
-        width, height = self.bin_packing.capacity.get_width_height()
         for sol_index, domain in domains.items():
             if len(domain) == 1:
                 continue
@@ -42,5 +42,41 @@ class Backtracking:
                 domains[sol_index] = {coordinate}
                 valid_solutions.extend(self.run(copy.deepcopy(domains)))
             break
+
+        return valid_solutions
+
+    def run_with_stack(self, domains: Domains) -> List[Solution]:
+        valid_solutions: List[Solution] = []
+        stack = deque()
+
+        for coordinate in domains[0]:
+            domains[0] = {coordinate}
+            stack.append(copy.deepcopy(domains))
+
+        while stack:
+            pick_domains = stack.pop()
+            self.ac3.run(pick_domains)
+
+            state = False
+            for domain in domains.values():
+                if len(domain) == 0:
+                    state = True
+            if state:
+                continue
+
+            if all(len(domain) == 1 for domain in pick_domains.values()):
+                valid_sol = Solution(len(pick_domains))
+                for i in range(len(pick_domains)):
+                    valid_sol[i] = pick_domains[i].pop()
+                valid_solutions.append(valid_sol)
+                continue
+
+            for sol_index, domain in pick_domains.items():
+                if len(domain) == 1:
+                    continue
+                for coordinate in domain:
+                    pick_domains[sol_index] = {coordinate}
+                    stack.append(copy.deepcopy(pick_domains))
+                break
 
         return valid_solutions
