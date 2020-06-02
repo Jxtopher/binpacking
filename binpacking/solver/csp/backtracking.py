@@ -1,5 +1,4 @@
-from collections import deque
-from typing import List
+from typing import List, Deque
 import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
@@ -47,7 +46,7 @@ class Backtracking:
 
     def run_with_stack(self, domains: Domains) -> List[Solution]:
         valid_solutions: List[Solution] = []
-        stack = deque()
+        stack: Deque[Domains] = Deque()
 
         for coordinate in domains[0]:
             domains[0] = {coordinate}
