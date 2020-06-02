@@ -1,6 +1,5 @@
 from typing import Tuple
 from binpacking.solver.bin_packing_2d import BinPacking2D
-from binpacking.solver.solution import Solution
 from binpacking.solver.domains import Domains
 
 
@@ -8,14 +7,8 @@ class AC3:
     def __init__(self, bin_packing: BinPacking2D):
         self.bin_packing = bin_packing
 
-    def run(self, sol: Solution, accept_invalid_coordinates: bool = True) -> Domains:
-        width, height = self.bin_packing.capacity.get_width_height()
-        domains = Domains(self.bin_packing)
-        self.ac3(sol, domains)
-        return domains
-
-    def ac3(self, sol: Solution, domains: Domains) -> None:
-        for i in range(len(sol)):
+    def run(self, domains: Domains) -> None:
+        for i in range(self.bin_packing.get_instance_size()):
             domains[i] -= set(
                 vx
                 for vx in domains[i]
@@ -25,7 +18,7 @@ class AC3:
                 )
             )
 
-            worklist = set((i, j) for j in range(len(sol)) if j != i)
+            worklist = set((i, j) for j in range(self.bin_packing.get_instance_size()) if j != i)
 
             while len(worklist) != 0:
                 arc = worklist.pop()
@@ -34,7 +27,11 @@ class AC3:
                         raise Exception('Total kaput!')
                     else:
                         worklist = worklist.union(
-                            set((i, j) for j in range(len(sol)) if j != i and j != arc[1])
+                            set(
+                                (i, j)
+                                for j in range(self.bin_packing.get_instance_size())
+                                if j != i and j != arc[1]
+                            )
                         )
 
     def arc_reduce(self, arc: Tuple[int, int], domains: Domains) -> bool:
