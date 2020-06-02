@@ -40,7 +40,7 @@ class BacktrackingTest(BaseTestCase):
                 number_of_solutions += 1
         self.assertEqual(number_of_solutions, 8)
 
-    def test_backtracking(self) -> None:
+    def test_backtracking_with_stack(self) -> None:
         instance = BinPacking2D(
             Rectangle(2, 2), [Rectangle(2, 1), Rectangle(1, 1), Rectangle(1, 1)],
         )
