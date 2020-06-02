@@ -18,10 +18,10 @@ class Backtracking:
         self.stop_criteria = stop_criteria
         self.ac3 = AC3(self.bin_packing)
 
-    def run(self, sol: Solution, domains: Domains) -> List[Solution]:
+    def run(self, domains: Domains) -> List[Solution]:
         valid_solutions: List[Solution] = []
 
-        self.ac3.run(sol, domains)
+        self.ac3.run(domains)
 
         for domain in domains.values():
             if len(domain) == 0:
@@ -40,7 +40,7 @@ class Backtracking:
                 continue
             for coordinate in domain:
                 domains[sol_index] = {coordinate}
-                valid_solutions.extend(self.run(copy.deepcopy(sol), copy.deepcopy(domains)))
+                valid_solutions.extend(self.run(copy.deepcopy(domains)))
             break
 
         return valid_solutions
