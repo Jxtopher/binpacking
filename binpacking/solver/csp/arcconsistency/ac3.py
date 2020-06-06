@@ -1,4 +1,5 @@
 from typing import Tuple
+
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.domains import Domains
 

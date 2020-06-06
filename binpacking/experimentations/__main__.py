@@ -8,28 +8,10 @@ import matplotlib.pyplot as plt
 from binpacking.experimentations.exp_backtracking import ExpBacktracking
 from binpacking.experimentations.manage_parallel_run import ManageParallelRun
 
+
 # Colors, markers and lines
 lines = ['-']  # also possible: '--', '-.', ':'
-markers = [
-    'o',
-    'v',
-    '^',
-    '^',
-    '>',
-    '1',
-    '2',
-    '3',
-    '4',
-    '8',
-    's',
-    'p',
-    '*',
-    'h',
-    'H',
-    '+',
-    '<',
-    'D',
-]
+markers = ['o', 'v', '^', '^', '>', '1', '2', '3', '4', '8', 's', 'p', '*', 'h', 'H', '+', '<', 'D']
 colors = [
     'xkcd:black',
     'xkcd:blue',

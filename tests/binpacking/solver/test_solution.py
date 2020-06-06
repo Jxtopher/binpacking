@@ -1,5 +1,4 @@
 from tests.base import BaseTestCase
-
 from binpacking.solver.solution import Solution
 
 

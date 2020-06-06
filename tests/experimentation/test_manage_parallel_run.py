@@ -1,23 +1,23 @@
 from statistics import mean
-from tests.base import BaseTestCase
 
+from tests.base import BaseTestCase
 from binpacking.experimentations.manage_parallel_run import ManageParallelRun
 
 
 class ManageParallelRunTest(BaseTestCase):
     @staticmethod
-    def sum(n: int) -> float:
+    def sum_1_to_n(n: int) -> float:
         return float(n * (n + 1)) / 2
 
     def test_run_parallel(self) -> None:
-        r = ManageParallelRun.run_parallel(ManageParallelRunTest.sum, [3, 4, 5], ret=True)
+        r = ManageParallelRun.run_parallel(ManageParallelRunTest.sum_1_to_n, [3, 4, 5], ret=True)
         self.assertEqual(
             mean(r),
             mean(
                 [
-                    ManageParallelRunTest.sum(3),
-                    ManageParallelRunTest.sum(4),
-                    ManageParallelRunTest.sum(5),
+                    ManageParallelRunTest.sum_1_to_n(3),
+                    ManageParallelRunTest.sum_1_to_n(4),
+                    ManageParallelRunTest.sum_1_to_n(5),
                 ]
             ),
         )

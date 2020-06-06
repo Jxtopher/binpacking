@@ -1,5 +1,7 @@
+#
 # @brief : F. Glover, "Future paths for integer programming and links to artificial intelligence,"
 #          Computers & Operations Research, vol. 13, pp. 533-549, 1986.
+#
 
 from typing import Deque, Callable, List
 from collections import deque

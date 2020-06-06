@@ -8,6 +8,7 @@ from random import shuffle
 from datetime import timedelta
 from logging import getLogger
 
+
 log = getLogger(__name__)
 
 

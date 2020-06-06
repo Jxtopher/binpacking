@@ -1,12 +1,11 @@
 from typing import Callable, Any
 import os
 from unittest import TestCase, skipUnless
+from random import seed
 
 from binpacking.plot.plot_handler import PlotHandler
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
-
-from random import seed
 
 
 class BaseTestCase(TestCase):
