@@ -1,5 +1,4 @@
 from tests.base import BaseTestCase
-
 from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.solution import Solution
 
@@ -10,6 +9,8 @@ class StopCriteriaTest(BaseTestCase):
         budget = CriterionBudget(50)
         stop_criteria = StopCriteria()
         stop_criteria.add_criterion(budget)
+
         for i in range(50):
             self.assertTrue(stop_criteria.run(sol))
+
         self.assertFalse(stop_criteria.run(sol))

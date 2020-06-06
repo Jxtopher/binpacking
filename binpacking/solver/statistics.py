@@ -1,6 +1,7 @@
-from abc import ABCMeta, abstractmethod
 from typing import List, Dict, Any
+from abc import ABCMeta, abstractmethod
 import copy
+
 from binpacking.solver.solution import Solution
 
 

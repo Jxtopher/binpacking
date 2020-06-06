@@ -1,6 +1,6 @@
 .PHONY: list activate install update \
 		flake mypy mypy-context black black-check checks \
-		plot, test
+		plot, run-solver, run-exp, test
 
 .DEFAULT_GOAL := activate
 

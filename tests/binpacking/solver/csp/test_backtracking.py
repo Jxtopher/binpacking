@@ -1,5 +1,4 @@
 from tests.base import BaseTestCase
-
 from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle

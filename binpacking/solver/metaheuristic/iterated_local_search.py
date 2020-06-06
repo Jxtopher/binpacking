@@ -3,8 +3,10 @@
 #         Iterated local search, Economics Working Papers, Department of Economics and Business,
 #         Universitat Pompeu Fabra, https://EconPapers.repec.org/RePEc:upf:upfgen:513.
 #         (https://econ-papers.upf.edu/papers/513.pdf)
-import copy
+
 from typing import List
+import copy
+
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria

@@ -5,7 +5,7 @@ from binpacking.solver.statistics import (
 from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
-from binpacking.solver.naiveMethods.backtracking import Backtracking
+from binpacking.solver.naive_methods.backtracking import Backtracking
 
 
 class ExpBacktracking:
