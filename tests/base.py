@@ -5,7 +5,7 @@ from random import seed
 
 from binpacking.plot.plot_handler import PlotHandler
 from binpacking.solver.bin_packing_2d import BinPacking2D
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 
 
 class BaseTestCase(TestCase):

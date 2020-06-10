@@ -2,7 +2,7 @@ import copy
 
 from tests.base import BaseTestCase
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 from binpacking.solver.optimisation.metaheuristic.atomic_operator.neighborhood import Neighborhood
 
 

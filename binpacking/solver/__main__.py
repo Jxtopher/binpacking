@@ -2,7 +2,7 @@ import argparse
 
 from binpacking.solver.statistics import Statistics, StatisticSolution, StatisticFitness
 from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
 from binpacking.plot.plot_handler import PlotHandler
 from binpacking.solver.optimisation.metaheuristic.tabu_search import TabuSearch

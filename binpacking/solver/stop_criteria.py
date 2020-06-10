@@ -2,7 +2,7 @@ from typing import List
 from abc import ABCMeta, abstractmethod
 import copy
 
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 
 
 class Criterion:

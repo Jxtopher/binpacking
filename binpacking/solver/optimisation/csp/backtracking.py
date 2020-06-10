@@ -4,9 +4,9 @@ import copy
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 from binpacking.solver.optimisation.csp.arcconsistency.ac3 import AC3
-from binpacking.solver.domains import Domains
+from binpacking.solver.data_structure.domains import Domains
 from binpacking.solver.optimisation.optimisation import Optimisation
 
 

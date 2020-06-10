@@ -3,8 +3,8 @@ from typing import List, Optional
 from pythonlangutil.overload import Overload, signature
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
-from binpacking.solver.solution import Solution
-from binpacking.solver.domains import Domains
+from binpacking.solver.data_structure.solution import Solution
+from binpacking.solver.data_structure.domains import Domains
 
 
 class Optimisation(object, metaclass=ABCMeta):
