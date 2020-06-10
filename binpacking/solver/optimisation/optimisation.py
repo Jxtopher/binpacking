@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import List, Optional
+from typing import List
 from pythonlangutil.overload import Overload, signature
 
 from binpacking.solver.bin_packing_2d import BinPacking2D

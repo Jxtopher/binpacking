@@ -1,12 +1,11 @@
 from random import randint
-from typing import List, Optional
+from typing import List
 import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.data_structure.solution import Solution, Coordinate
-from binpacking.solver.data_structure.domains import Domains
 from binpacking.solver.optimisation.optimisation import Optimisation
 
 
