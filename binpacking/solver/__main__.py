@@ -6,7 +6,9 @@ from binpacking.solver.data_structure.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
 from binpacking.plot.plot_handler import PlotHandler
 from binpacking.solver.optimisation.metaheuristic.tabu_search import TabuSearch
-from binpacking.solver.optimisation.metaheuristic.atomic_operator.neighborhood import Neighborhood
+from binpacking.solver.optimisation.metaheuristic.atomic_operator.neighborhood import (
+    Neighborhood_one_mutation,
+)
 
 
 if __name__ == '__main__':
@@ -32,6 +34,8 @@ if __name__ == '__main__':
     stop_criteria = StopCriteria()
     stop_criteria.add_criterion(CriterionBudget(args.max_iterations))
 
+    neighborhood_one_mutation = Neighborhood_one_mutation(bin_packing)
+
     tabu_size = 5
     max_iterations = args.max_iterations
     ts = TabuSearch(
@@ -40,7 +44,7 @@ if __name__ == '__main__':
         stop_criteria,
         tabu_size,
         max_iterations,
-        getattr(Neighborhood, 'find_one_mutation_neighbor'),
+        neighborhood_one_mutation,
     )
 
     solutions = ts.run(sol_init)
