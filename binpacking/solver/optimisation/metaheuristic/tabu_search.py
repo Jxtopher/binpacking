@@ -21,14 +21,12 @@ class TabuSearch(Optimisation):
         statistics: Statistics,
         stop_criteria: StopCriteria,
         tabu_size: int,
-        max_iterations: int,
         atomic_operator: Optimisation,
     ):
         self.bin_packing = bin_packing
         self.statistics = statistics
         self.stop_criteria = stop_criteria
         self.tabu_size = tabu_size
-        self.max_iterations = max_iterations
         self.atomic_operator = atomic_operator
         self.tabu_deque: Deque[Solution] = deque(maxlen=self.tabu_size)
 

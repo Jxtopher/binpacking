@@ -12,6 +12,9 @@ class Optimisation(object, metaclass=ABCMeta):
     def __init__(self, bin_packing: BinPacking2D):
         self.bin_packing = bin_packing
 
+    def get_instance_of_problem(self) -> BinPacking2D:
+        return self.bin_packing
+
     @abstractmethod
     @Overload
     @signature("Solution")

@@ -9,6 +9,7 @@ from binpacking.solver.optimisation.metaheuristic.tabu_search import TabuSearch
 from binpacking.solver.optimisation.metaheuristic.atomic_operator.neighborhood import (
     Neighborhood_one_mutation,
 )
+from binpacking.solver.factory import Factory
 
 
 if __name__ == '__main__':
@@ -21,9 +22,16 @@ if __name__ == '__main__':
         help='Instance path of bin packing',
     )
     parser.add_argument(
+        '-c', '--config', type=str, default='', help='Solver configuration',
+    )
+    parser.add_argument(
         '--max_iterations', type=int, default=300, help='Maximum number of iterations'
     )
     args = parser.parse_args()
+
+    if args.config != '':
+        instance = Factory.build_solver(args.config)
+        exit(0)
 
     bin_packing = InstanceLoader.get_bin_packing(args.instance)
     sol_init = Solution(bin_packing.get_instance_size())
@@ -37,15 +45,7 @@ if __name__ == '__main__':
     neighborhood_one_mutation = Neighborhood_one_mutation(bin_packing)
 
     tabu_size = 5
-    max_iterations = args.max_iterations
-    ts = TabuSearch(
-        bin_packing,
-        statistics,
-        stop_criteria,
-        tabu_size,
-        max_iterations,
-        neighborhood_one_mutation,
-    )
+    ts = TabuSearch(bin_packing, statistics, stop_criteria, tabu_size, neighborhood_one_mutation,)
 
     solutions = ts.run(sol_init)
     print('best solutions')

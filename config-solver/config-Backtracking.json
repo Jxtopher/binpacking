@@ -1,8 +1,8 @@
 {
     "seed": 0,
-    "dataStructure": "Solution",
-    "OptimizationAlgorithm": "TabuSearch",
-    "TabuSearch": {
+    "dataStructure": "Domains",
+    "OptimizationAlgorithm": "Backtracking",
+    "Backtracking": {
         "BinPacking2D_overload": {
             "capacity": [
                 3,
@@ -32,38 +32,7 @@
             ]
         },
         "Statistics": {},
-        "StopCriteria": {},
-        "tabu_size": 200,
-        "Neighborhood_one_mutation": {
-            "BinPacking2D_overload": {
-                "capacity": [
-                    3,
-                    6
-                ],
-                "items": [
-                    [
-                        2,
-                        3
-                    ],
-                    [
-                        2,
-                        1
-                    ],
-                    [
-                        3,
-                        4
-                    ],
-                    [
-                        3,
-                        2
-                    ],
-                    [
-                        2,
-                        5
-                    ]
-                ]
-            }
-        }
+        "StopCriteria": {}
     },
     "Statistic": {
         "recording": "stdout",
