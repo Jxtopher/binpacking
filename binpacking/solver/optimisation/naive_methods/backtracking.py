@@ -1,5 +1,5 @@
 from random import randint
-from typing import List
+from typing import List, Optional
 import copy
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
@@ -7,6 +7,7 @@ from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.solution import Solution, Coordinate
 from binpacking.solver.optimisation.optimisation import Optimisation
+from binpacking.solver.domains import Domains
 
 
 class Backtracking(Optimisation):
@@ -17,7 +18,8 @@ class Backtracking(Optimisation):
         stop_criteria: StopCriteria,
         randomize: bool = False,
     ):
-        self.bin_packing = bin_packing
+        super().__init__(bin_packing)
+        # self.bin_packing = bin_packing
         self.statistics = statistics
         self.stop_criteria = stop_criteria
         self.randomize = randomize

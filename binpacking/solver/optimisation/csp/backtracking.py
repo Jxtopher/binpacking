@@ -7,9 +7,10 @@ from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.solution import Solution
 from binpacking.solver.optimisation.csp.arcconsistency.ac3 import AC3
 from binpacking.solver.domains import Domains
+from binpacking.solver.optimisation.optimisation import Optimisation
 
 
-class Backtracking:
+class Backtracking(Optimisation):
     def __init__(
         self, bin_packing: BinPacking2D, statistics: Statistics, stop_criteria: StopCriteria
     ):

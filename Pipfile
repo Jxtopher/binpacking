@@ -10,6 +10,7 @@ black = "*"
 
 [packages]
 matplotlib = "*"
+pythonlangutil = "*"
 
 [requires]
 python_version = "3.8"
