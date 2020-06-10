@@ -4,7 +4,7 @@ from typing import List
 from binpacking.solver.solution import Solution
 
 
-class OptimisationAlgo:
+class Optimisation:
 
     __metaclass__ = ABCMeta
 

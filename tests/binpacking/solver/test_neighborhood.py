@@ -3,7 +3,7 @@ import copy
 from tests.base import BaseTestCase
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 from binpacking.solver.solution import Solution
-from binpacking.solver.metaheuristic.neighborhood import Neighborhood
+from binpacking.solver.optimisation.metaheuristic.neighborhood import Neighborhood
 
 
 class NeighborhoodTest(BaseTestCase):

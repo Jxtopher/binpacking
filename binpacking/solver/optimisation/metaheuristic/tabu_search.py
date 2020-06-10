@@ -11,10 +11,10 @@ from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.solution import Solution
-from binpacking.solver.optimisation_algo import OptimisationAlgo
+from binpacking.solver.optimisation.optimisation import Optimisation
 
 
-class TabuSearch(OptimisationAlgo):
+class TabuSearch(Optimisation):
     def __init__(
         self,
         bin_packing: BinPacking2D,

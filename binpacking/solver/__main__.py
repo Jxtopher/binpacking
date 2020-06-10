@@ -5,8 +5,8 @@ from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
 from binpacking.plot.plot_handler import PlotHandler
-from binpacking.solver.metaheuristic.tabu_search import TabuSearch
-from binpacking.solver.metaheuristic.neighborhood import Neighborhood
+from binpacking.solver.optimisation.metaheuristic.tabu_search import TabuSearch
+from binpacking.solver.optimisation.metaheuristic.neighborhood import Neighborhood
 
 
 if __name__ == '__main__':
