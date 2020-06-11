@@ -36,13 +36,10 @@ class Register(object):
     def __getattr__(self, name: str) -> Any:
         return getattr(self.instance, name)
 
-    def __setattr__(self, name: str) -> Any:
-        return setattr(self.instance, name)
-
 
 class Factory:
     @classmethod
-    def load_json(cls, filename: str) -> Dict[str, Any]:
+    def load_json(cls, filename: str) -> Any:
         file_path = path.join("", filename)
         with open(file_path) as f:
             content = f.read()
