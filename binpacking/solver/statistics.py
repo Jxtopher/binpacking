@@ -45,10 +45,10 @@ class StatisticSolStar(Statistic):
 
 
 class Statistics:
-    def __init__(self, statistic: Optional[Statistic] = None) -> None:
+    def __init__(self, *args: Statistic) -> None:
         self.statistics: List[Statistic] = []
-        if statistic is not None:
-            self.statistics.append(copy.deepcopy(statistic))
+        for arg in args:
+            self.statistics.append(copy.deepcopy(arg))
 
     def run(self, sol: Solution) -> Dict[str, Any]:
         result: Dict[str, Any] = {}

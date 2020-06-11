@@ -24,10 +24,10 @@ class CriterionBudget(Criterion):
 
 
 class StopCriteria:
-    def __init__(self, criterion: Optional[Criterion] = None) -> None:
+    def __init__(self, *args: Criterion) -> None:
         self.criterions: List[Criterion] = []
-        if criterion is not None:
-            self.criterions.append(copy.deepcopy(criterion))
+        for arg in args:
+            self.criterions.append(copy.deepcopy(arg))
 
     def run(self, sol: Solution) -> bool:
         result = True
