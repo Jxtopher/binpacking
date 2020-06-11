@@ -5,44 +5,25 @@
     "Backtracking": {
         "BinPacking2D_overload": {
             "capacity": [
-                3,
-                6
+                2,
+                2
             ],
             "items": [
-                [
-                    2,
-                    3
-                ],
                 [
                     2,
                     1
                 ],
                 [
-                    3,
-                    4
+                    1,
+                    1
                 ],
                 [
-                    3,
-                    2
-                ],
-                [
-                    2,
-                    5
+                    1,
+                    1
                 ]
             ]
         },
         "Statistics": {},
         "StopCriteria": {}
-    },
-    "Statistic": {
-        "recording": "stdout",
-        "sensorNameCallingClass": true,
-        "sensorNumRound": false,
-        "sensorSolution": false,
-        "sensorStopwatch": false,
-        "sensorFinal": {
-            "name": "oneMax",
-            "num": 6
-        }
     }
 }

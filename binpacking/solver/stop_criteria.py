@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from abc import ABCMeta, abstractmethod
 import copy
 
@@ -24,8 +24,10 @@ class CriterionBudget(Criterion):
 
 
 class StopCriteria:
-    def __init__(self) -> None:
+    def __init__(self, criterion: Optional[Criterion] = None) -> None:
         self.criterions: List[Criterion] = []
+        if criterion is not None:
+            self.criterions.append(copy.deepcopy(criterion))
 
     def run(self, sol: Solution) -> bool:
         result = True

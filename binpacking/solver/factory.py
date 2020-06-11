@@ -1,4 +1,4 @@
-from typing import Dict, Any
+from typing import Dict, Any, Tuple, List
 from os import path
 import json
 import importlib
@@ -42,15 +42,15 @@ class Register(object):
 
 class Factory:
     @classmethod
-    def load_json(cls, filename: str) -> Dict:
+    def load_json(cls, filename: str) -> Dict[str, Any]:
         file_path = path.join("", filename)
         with open(file_path) as f:
             content = f.read()
             return json.loads(content)
 
     @staticmethod
-    def build_instance(name_class: str, build: dict) -> Any:
-        list_of_paramter: list((str, Any)) = []
+    def build_instance(name_class: str, build: Dict[str, Any]) -> Any:
+        list_of_paramter: List[Tuple[str, Any]] = []
         for name_parameter in build:
             print(build[name_parameter])
 
@@ -67,6 +67,7 @@ class Factory:
         register = Register()
         module = importlib.import_module(register.get_import_module(name_class))
         class_ = getattr(module, name_class)
+
         # instance = class_()
         l_parameter = []
         for parameter in list_of_paramter:
@@ -75,7 +76,7 @@ class Factory:
 
     @staticmethod
     def build_solver(path_config: str) -> None:
-        config: Dict = Factory.load_json(path_config)
+        config: Dict[Any, Any] = Factory.load_json(path_config)
         # print(config["OptimizationAlgorithm"])
         instance_of_optimisation_algo = Factory.build_instance(
             config["OptimizationAlgorithm"], config[config["OptimizationAlgorithm"]]
@@ -85,7 +86,8 @@ class Factory:
             print("xx")
             instance_of_probleme = instance_of_optimisation_algo.get_instance_of_problem()
             domains = Domains(instance_of_probleme)
-            instance_of_optimisation_algo.run(domains)
+            print(instance_of_optimisation_algo.run(domains))
+
         else:
             instance_of_probleme = instance_of_optimisation_algo.get_instance_of_problem()
             sol_init = Solution(instance_of_probleme.get_instance_size())

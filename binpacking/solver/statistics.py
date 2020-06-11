@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from abc import ABCMeta, abstractmethod
 import copy
 
@@ -45,8 +45,10 @@ class StatisticSolStar(Statistic):
 
 
 class Statistics:
-    def __init__(self) -> None:
+    def __init__(self, statistic: Optional[Statistic] = None) -> None:
         self.statistics: List[Statistic] = []
+        if statistic is not None:
+            self.statistics.append(copy.deepcopy(statistic))
 
     def run(self, sol: Solution) -> Dict[str, Any]:
         result: Dict[str, Any] = {}

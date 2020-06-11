@@ -16,6 +16,7 @@ class Neighborhood_one_mutation(Optimisation):
         item = self.bin_packing.get_item(index)
         capacity_width, capacity_height = capacity.get_width_height()
         width, height = item.get_width_height(sol[index].is_rotated)
+        print(str(capacity_width - width) + " " + str(capacity_width) + " " + str(width))
         x, y = (
             randint(0, capacity_width - width),
             randint(0, capacity_height - height),

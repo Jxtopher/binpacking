@@ -22,7 +22,11 @@ if __name__ == '__main__':
         help='Instance path of bin packing',
     )
     parser.add_argument(
-        '-c', '--config', type=str, default='', help='Solver configuration',
+        '-c',
+        '--config',
+        type=str,
+        default='config-solver/config-tabu-search.json',
+        help='Solver configuration',
     )
     parser.add_argument(
         '--max_iterations', type=int, default=300, help='Maximum number of iterations'
