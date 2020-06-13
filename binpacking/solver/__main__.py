@@ -34,7 +34,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.config != '':
-        instance = Factory.build_solver(args.config)
+        config = Factory.load_json(args.config)
+        instance = Factory.build_config(config)
+        results = Factory.run_solver(config, instance)
+        print(results)
         exit(0)
 
     bin_packing = InstanceLoader.get_bin_packing(args.instance)

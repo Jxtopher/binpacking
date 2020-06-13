@@ -82,8 +82,7 @@ class Factory:
         return list_of_instances[name_class]
 
     @staticmethod
-    def build_solver(path_config: str) -> None:
-        config: Dict[Any, Any] = Factory.load_json(path_config)
+    def build_config(config: Dict[Any, Any]) -> Any:
         list_of_instances: Dict[str, Any] = {}
         instance_of_optimisation_algo = Factory.build_instance(
             config["OptimizationAlgorithm"],
@@ -91,11 +90,16 @@ class Factory:
             list_of_instances,
         )
 
-        instance_of_probleme = instance_of_optimisation_algo.get_instance_of_problem()
+        return instance_of_optimisation_algo
+
+    @staticmethod
+    def run_solver(config: Dict[Any, Any], instance_optimisation: Any) -> List[Solution]:
+        instance_of_probleme = instance_optimisation.get_instance_of_problem()
         if config["dataStructure"] == "Domains":
             domains = Domains(instance_of_probleme)
-            print(instance_of_optimisation_algo.run(domains))
+            ret = instance_optimisation.run(domains)
 
         elif config["dataStructure"] == "Solution":
             sol_init = Solution(instance_of_probleme.get_instance_size())
-            instance_of_optimisation_algo.run(sol_init)
+            ret = instance_optimisation.run(sol_init)
+        return ret
