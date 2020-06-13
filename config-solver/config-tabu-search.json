@@ -26,31 +26,12 @@
         "Statistics": {},
         "StopCriteria": {
             "CriterionBudget": {
-                "max_iterations": 200
+                "max_iterations": 400
             }
         },
         "tabu_size": 200,
         "Neighborhood_one_mutation": {
-            "BinPacking2D_overload": {
-                "capacity": [
-                    2,
-                    2
-                ],
-                "items": [
-                    [
-                        2,
-                        1
-                    ],
-                    [
-                        1,
-                        1
-                    ],
-                    [
-                        1,
-                        1
-                    ]
-                ]
-            }
+            "BinPacking2D_overload": "ref:BinPacking2D_overload"
         }
     }
 }

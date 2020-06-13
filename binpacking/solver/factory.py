@@ -1,7 +1,9 @@
-from typing import Dict, Any, Tuple, List
+from typing import Dict, Any, Tuple, List, Deque
 from os import path
+import copy
 import json
 import importlib
+import re
 
 from binpacking.solver.data_structure.domains import Domains
 from binpacking.solver.data_structure.solution import Solution
@@ -46,41 +48,54 @@ class Factory:
             return json.loads(content)
 
     @staticmethod
-    def build_instance(name_class: str, build: Dict[str, Any]) -> Any:
-        list_of_paramter: List[Tuple[str, Any]] = []
+    def build_instance(
+        name_class: str, build: Dict[str, Any], list_of_instances: List[Tuple[str, Any]]
+    ) -> Any:
+        list_of_paramters: List[Tuple[str, Any]] = []
         for name_parameter in build:
-            print(build[name_parameter])
-
             if isinstance(build[name_parameter], dict):
-                list_of_paramter.append(
-                    (name_parameter, Factory.build_instance(name_parameter, build[name_parameter]))
+                list_of_paramters.append(
+                    (
+                        name_parameter,
+                        Factory.build_instance(
+                            name_parameter, build[name_parameter], list_of_instances
+                        ),
+                    )
                 )
             else:
-                list_of_paramter.append((name_parameter, build[name_parameter]))
-
-        print("S======")
-        print(name_class)
+                if (
+                    isinstance(build[name_parameter], str)
+                    and re.match(r"^ref:", build[name_parameter]) is not None
+                ):
+                    reference = re.sub(r"^ref:", '', build[name_parameter])
+                    for name, instance in list_of_instances:
+                        if name == reference:
+                            list_of_paramters.append((name_parameter, instance))
+                else:
+                    list_of_paramters.append((name_parameter, build[name_parameter]))
 
         register = Register()
         module = importlib.import_module(register.get_import_module(name_class))
         class_ = getattr(module, name_class)
 
-        # instance = class_()
         l_parameter = []
-        for parameter in list_of_paramter:
+        for parameter in list_of_paramters:
             l_parameter.append(parameter[1])
-        return class_(*l_parameter)
+
+        list_of_instances.append((copy.deepcopy(name_class), copy.deepcopy(class_(*l_parameter))))
+        return list_of_instances[len(list_of_instances) - 1][1]
 
     @staticmethod
     def build_solver(path_config: str) -> None:
         config: Dict[Any, Any] = Factory.load_json(path_config)
-        # print(config["OptimizationAlgorithm"])
+        list_of_instances: List[Tuple[str, Any]] = []
         instance_of_optimisation_algo = Factory.build_instance(
-            config["OptimizationAlgorithm"], config[config["OptimizationAlgorithm"]]
+            config["OptimizationAlgorithm"],
+            config[config["OptimizationAlgorithm"]],
+            list_of_instances,
         )
 
         if config["dataStructure"] == "Domains":
-            print("xx")
             instance_of_probleme = instance_of_optimisation_algo.get_instance_of_problem()
             domains = Domains(instance_of_probleme)
             print(instance_of_optimisation_algo.run(domains))
