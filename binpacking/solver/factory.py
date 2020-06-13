@@ -53,7 +53,7 @@ class Factory:
     ) -> Any:
         list_of_paramters: List[Tuple[str, Any]] = []
         for name_parameter in build:
-            if isinstance(build[name_parameter], dict):
+            if isinstance(build[name_parameter], Dict):
                 list_of_paramters.append(
                     (
                         name_parameter,
