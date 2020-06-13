@@ -19,4 +19,3 @@ class FactoryTest(BaseTestCase):
         results = Factory.run_solver(config, instance)
 
         self.assertEqual(len(results), 49)
-        pass
