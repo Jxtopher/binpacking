@@ -1,4 +1,4 @@
-from typing import Dict, Any, Tuple, List, Deque
+from typing import Dict, Any, Tuple, List
 from os import path
 import copy
 import json
@@ -49,58 +49,53 @@ class Factory:
 
     @staticmethod
     def build_instance(
-        name_class: str, build: Dict[str, Any], list_of_instances: List[Tuple[str, Any]]
+        name_class: str, config: Dict[str, Any], list_of_instances: Dict[str, Any]
     ) -> Any:
         list_of_paramters: List[Tuple[str, Any]] = []
-        for name_parameter in build:
-            if isinstance(build[name_parameter], Dict):
+        for name_parameter in config:
+            if isinstance(config[name_parameter], Dict):
                 list_of_paramters.append(
                     (
                         name_parameter,
                         Factory.build_instance(
-                            name_parameter, build[name_parameter], list_of_instances
+                            name_parameter, config[name_parameter], list_of_instances
                         ),
                     )
                 )
             else:
                 if (
-                    isinstance(build[name_parameter], str)
-                    and re.match(r"^ref:", build[name_parameter]) is not None
+                    isinstance(config[name_parameter], str)
+                    and re.match(r"^ref:", config[name_parameter]) is not None
                 ):
-                    reference = re.sub(r"^ref:", '', build[name_parameter])
-                    for name, instance in list_of_instances:
-                        if name == reference:
-                            list_of_paramters.append((name_parameter, instance))
+                    reference = re.sub(r"^ref:", '', config[name_parameter])
+                    list_of_paramters.append((name_parameter, list_of_instances[reference]))
                 else:
-                    list_of_paramters.append((name_parameter, build[name_parameter]))
+                    list_of_paramters.append((name_parameter, config[name_parameter]))
 
         register = Register()
         module = importlib.import_module(register.get_import_module(name_class))
         class_ = getattr(module, name_class)
 
-        l_parameter = []
-        for parameter in list_of_paramters:
-            l_parameter.append(parameter[1])
+        l_parameter = [parameter for name, parameter in list_of_paramters]
 
-        list_of_instances.append((copy.deepcopy(name_class), copy.deepcopy(class_(*l_parameter))))
-        return list_of_instances[len(list_of_instances) - 1][1]
+        list_of_instances[name_class] = copy.deepcopy(class_(*l_parameter))
+        return list_of_instances[name_class]
 
     @staticmethod
     def build_solver(path_config: str) -> None:
         config: Dict[Any, Any] = Factory.load_json(path_config)
-        list_of_instances: List[Tuple[str, Any]] = []
+        list_of_instances: Dict[str, Any] = {}
         instance_of_optimisation_algo = Factory.build_instance(
             config["OptimizationAlgorithm"],
             config[config["OptimizationAlgorithm"]],
             list_of_instances,
         )
 
+        instance_of_probleme = instance_of_optimisation_algo.get_instance_of_problem()
         if config["dataStructure"] == "Domains":
-            instance_of_probleme = instance_of_optimisation_algo.get_instance_of_problem()
             domains = Domains(instance_of_probleme)
             print(instance_of_optimisation_algo.run(domains))
 
-        else:
-            instance_of_probleme = instance_of_optimisation_algo.get_instance_of_problem()
+        elif config["dataStructure"] == "Solution":
             sol_init = Solution(instance_of_probleme.get_instance_size())
             instance_of_optimisation_algo.run(sol_init)
