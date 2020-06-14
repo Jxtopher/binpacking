@@ -1,6 +1,6 @@
 from tests.base import BaseTestCase
 from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 
 
 class StopCriteriaTest(BaseTestCase):

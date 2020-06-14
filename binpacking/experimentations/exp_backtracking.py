@@ -3,9 +3,9 @@ from binpacking.solver.statistics import (
     StatisticSolStar,
 )
 from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 from binpacking.solver.instance_loader import InstanceLoader
-from binpacking.solver.naive_methods.backtracking import Backtracking
+from binpacking.solver.optimisation.naive_methods.backtracking import Backtracking
 
 
 class ExpBacktracking:

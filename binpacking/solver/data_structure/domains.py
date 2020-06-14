@@ -1,7 +1,7 @@
 from typing import Set, Dict, Optional
 
 from binpacking.solver.bin_packing_2d import BinPacking2D
-from binpacking.solver.solution import Coordinate
+from binpacking.solver.data_structure.solution import Coordinate
 
 
 class Domains(Dict[int, Set[Coordinate]]):
@@ -9,7 +9,7 @@ class Domains(Dict[int, Set[Coordinate]]):
         self, bin_packing: Optional[BinPacking2D] = None, accept_invalid_coordinates: bool = True
     ) -> None:
         if bin_packing is not None:
-            width, height = bin_packing.capacity.get_width_height()
+            width, height = bin_packing.get_capacity().get_width_height()
             super().__init__({i: set() for i in range(bin_packing.get_instance_size())})
 
             for i in range(bin_packing.get_instance_size()):

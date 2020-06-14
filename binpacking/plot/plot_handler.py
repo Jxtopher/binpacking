@@ -5,7 +5,7 @@ from random import uniform
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
 
 

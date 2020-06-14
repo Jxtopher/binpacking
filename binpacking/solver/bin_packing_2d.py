@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from binpacking.solver.solution import Solution, Coordinate
+from binpacking.solver.data_structure.solution import Solution, Coordinate
 
 
 class Rectangle:

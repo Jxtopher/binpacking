@@ -5,11 +5,11 @@ import copy
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
-from binpacking.solver.solution import Solution, Coordinate
-from binpacking.solver.optimisation_algo import OptimisationAlgo
+from binpacking.solver.data_structure.solution import Solution, Coordinate
+from binpacking.solver.optimisation.optimisation import Optimisation
 
 
-class Backtracking(OptimisationAlgo):
+class Backtracking(Optimisation):
     def __init__(
         self,
         bin_packing: BinPacking2D,
@@ -17,7 +17,8 @@ class Backtracking(OptimisationAlgo):
         stop_criteria: StopCriteria,
         randomize: bool = False,
     ):
-        self.bin_packing = bin_packing
+        super().__init__(bin_packing)
+        # self.bin_packing = bin_packing
         self.statistics = statistics
         self.stop_criteria = stop_criteria
         self.randomize = randomize

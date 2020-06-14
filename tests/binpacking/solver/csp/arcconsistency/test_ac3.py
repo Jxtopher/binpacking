@@ -1,7 +1,7 @@
 from tests.base import BaseTestCase
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
-from binpacking.solver.csp.arcconsistency.ac3 import AC3
-from binpacking.solver.domains import Domains
+from binpacking.solver.optimisation.csp.arcconsistency.ac3 import AC3
+from binpacking.solver.data_structure.domains import Domains
 
 
 class AC3Test(BaseTestCase):

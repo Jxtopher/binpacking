@@ -10,23 +10,24 @@ import copy
 from binpacking.solver.bin_packing_2d import BinPacking2D
 from binpacking.solver.statistics import Statistics
 from binpacking.solver.stop_criteria import StopCriteria
-from binpacking.solver.solution import Solution
-from binpacking.solver.metaheuristic.neighborhood import Neighborhood
-from binpacking.solver.optimisation_algo import OptimisationAlgo
+from binpacking.solver.data_structure.solution import Solution
+from binpacking.solver.optimisation.optimisation import Optimisation
 
 
-class IteratedLocalSearch(OptimisationAlgo):
+class IteratedLocalSearch(Optimisation):
     def __init__(
         self,
         bin_packing: BinPacking2D,
         statistics: Statistics,
         stop_criteria: StopCriteria,
-        optimisation_algo: OptimisationAlgo,
+        atomic_operator: Optimisation,
+        optimisation: Optimisation,
     ):
         self.bin_packing = bin_packing
         self.statistics = statistics
         self.stop_criteria = stop_criteria
-        self.optimisation_algo = optimisation_algo
+        self.atomic_operator = atomic_operator
+        self.optimisation = optimisation
 
     def run(self, sol: Solution) -> List[Solution]:
         # Best known solution
@@ -37,8 +38,8 @@ class IteratedLocalSearch(OptimisationAlgo):
         # while the stop criteria isn't reached
         while self.stop_criteria.run(s_star):
             s_prim = copy.deepcopy(s_star)
-            Neighborhood.find_random_neighbor(self.bin_packing, s_prim)
-            self.optimisation_algo.run(s_prim)
+            self.atomic_operator.run(s_prim)
+            self.optimisation.run(s_prim)
 
             if not s_star.has_valid_fitness():
                 self.bin_packing.evaluate(s_prim)

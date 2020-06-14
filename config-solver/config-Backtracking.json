@@ -1,8 +1,8 @@
 {
     "seed": 0,
-    "dataStructure": "Solution",
-    "OptimizationAlgorithm": "TabuSearch",
-    "TabuSearch": {
+    "dataStructure": "Domains",
+    "OptimizationAlgorithm": "Backtracking",
+    "Backtracking": {
         "BinPacking2D_overload": {
             "capacity": [
                 2,
@@ -24,14 +24,6 @@
             ]
         },
         "Statistics": {},
-        "StopCriteria": {
-            "CriterionBudget": {
-                "max_iterations": 400
-            }
-        },
-        "tabu_size": 200,
-        "Neighborhood_one_mutation": {
-            "BinPacking2D_overload": "ref:BinPacking2D_overload"
-        }
+        "StopCriteria": {}
     }
 }

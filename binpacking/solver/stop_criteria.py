@@ -2,7 +2,7 @@ from typing import List
 from abc import ABCMeta, abstractmethod
 import copy
 
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 
 
 class Criterion:
@@ -24,8 +24,10 @@ class CriterionBudget(Criterion):
 
 
 class StopCriteria:
-    def __init__(self) -> None:
+    def __init__(self, *args: Criterion) -> None:
         self.criterions: List[Criterion] = []
+        for arg in args:
+            self.criterions.append(copy.deepcopy(arg))
 
     def run(self, sol: Solution) -> bool:
         result = True

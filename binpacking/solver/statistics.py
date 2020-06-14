@@ -2,7 +2,7 @@ from typing import List, Dict, Any
 from abc import ABCMeta, abstractmethod
 import copy
 
-from binpacking.solver.solution import Solution
+from binpacking.solver.data_structure.solution import Solution
 
 
 class Statistic:
@@ -45,8 +45,10 @@ class StatisticSolStar(Statistic):
 
 
 class Statistics:
-    def __init__(self) -> None:
+    def __init__(self, *args: Statistic) -> None:
         self.statistics: List[Statistic] = []
+        for arg in args:
+            self.statistics.append(copy.deepcopy(arg))
 
     def run(self, sol: Solution) -> Dict[str, Any]:
         result: Dict[str, Any] = {}
