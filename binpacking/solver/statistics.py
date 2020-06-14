@@ -1,4 +1,4 @@
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from abc import ABCMeta, abstractmethod
 import copy
 
