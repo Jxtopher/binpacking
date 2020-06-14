@@ -21,7 +21,7 @@ class Optimisation(object, metaclass=ABCMeta):
     def run(self, sol: Solution) -> List[Solution]:
         pass
 
-    @abstractmethod
+    @abstractmethod  # type: ignore
     @run.overload
     @signature("Domains")
     def run(self, domains: Domains) -> List[Solution]:
