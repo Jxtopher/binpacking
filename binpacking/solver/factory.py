@@ -1,4 +1,4 @@
-from typing import Dict, Any, Tuple, List
+from typing import Dict, Any, Tuple, List, cast
 from os import path
 import copy
 import json
@@ -102,4 +102,4 @@ class Factory:
         elif config["dataStructure"] == "Solution":
             sol_init = Solution(instance_of_probleme.get_instance_size())
             ret = instance_optimisation.run(sol_init)
-        return ret
+        return cast(List[Solution], ret)
