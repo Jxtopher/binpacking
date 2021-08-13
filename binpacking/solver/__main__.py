@@ -22,7 +22,11 @@ if __name__ == '__main__':
         help='Instance path of bin packing',
     )
     parser.add_argument(
-        '-c', '--config', type=str, default='', help='Solver configuration',
+        '-c',
+        '--config',
+        type=str,
+        default='',
+        help='Solver configuration',
     )
     parser.add_argument(
         '--max_iterations', type=int, default=300, help='Maximum number of iterations'
@@ -48,7 +52,13 @@ if __name__ == '__main__':
     neighborhood_one_mutation = Neighborhood_one_mutation(bin_packing)
 
     tabu_size = 5
-    ts = TabuSearch(bin_packing, statistics, stop_criteria, tabu_size, neighborhood_one_mutation,)
+    ts = TabuSearch(
+        bin_packing,
+        statistics,
+        stop_criteria,
+        tabu_size,
+        neighborhood_one_mutation,
+    )
 
     solutions = ts.run(sol_init)
     print('best solutions')

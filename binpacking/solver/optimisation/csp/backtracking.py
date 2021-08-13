@@ -55,7 +55,10 @@ class Backtracking(Optimisation):
 
         while stack:
             pick_domains = stack.pop()
-            self.ac3.run(pick_domains)
+            try:
+                self.ac3.run(pick_domains)
+            except Exception:
+                continue
 
             if any(len(domain) == 0 for domain in domains.values()):
                 continue

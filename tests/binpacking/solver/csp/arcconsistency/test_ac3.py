@@ -7,7 +7,8 @@ from binpacking.solver.data_structure.domains import Domains
 class AC3Test(BaseTestCase):
     def test_ac3_with_all_fitting_inputs(self) -> None:
         instance = BinPacking2D(
-            Rectangle(100, 100), [Rectangle(10, 10), Rectangle(20, 20), Rectangle(10, 30)],
+            Rectangle(100, 100),
+            [Rectangle(10, 10), Rectangle(20, 20), Rectangle(10, 30)],
         )
 
         ac3 = AC3(instance)
@@ -17,7 +18,8 @@ class AC3Test(BaseTestCase):
 
     def test_ac3_without_all_fitting_inputs(self) -> None:
         instance = BinPacking2D(
-            Rectangle(10, 10), [Rectangle(1, 1), Rectangle(8, 8), Rectangle(3, 3)],
+            Rectangle(10, 10),
+            [Rectangle(1, 1), Rectangle(8, 8), Rectangle(3, 3)],
         )
 
         ac3 = AC3(instance)
@@ -27,7 +29,8 @@ class AC3Test(BaseTestCase):
 
     def test_ac3_with_all_fitting_inputs_2(self) -> None:
         instance = BinPacking2D(
-            Rectangle(100, 100), [Rectangle(10, 10), Rectangle(20, 20), Rectangle(10, 30)],
+            Rectangle(100, 100),
+            [Rectangle(10, 10), Rectangle(20, 20), Rectangle(10, 30)],
         )
 
         ac3 = AC3(instance)

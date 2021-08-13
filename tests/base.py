@@ -17,7 +17,8 @@ class BaseTestCase(TestCase):
 
     @classmethod
     def timeConsumingTest(
-        cls, reason_if_skip: str = 'Time consuming tests not enabled',
+        cls,
+        reason_if_skip: str = 'Time consuming tests not enabled',
     ) -> Callable[..., Any]:
         return skipUnless(cls.RUN_TIME_CONSUMING_TESTS, reason_if_skip)
 

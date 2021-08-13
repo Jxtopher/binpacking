@@ -5,14 +5,14 @@ jobs:
     working_directory: ~/circleci-binpacking
     docker:
       # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
-      - image: circleci/python:3.8
+      - image: circleci/python:3.9
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
     steps:
       - checkout # check out source code to working directory
       - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.9/site-packages
       - restore_cache:
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
@@ -25,7 +25,7 @@ jobs:
           paths:
             - ".venv"
             - "/usr/local/bin"
-            - "/usr/local/lib/python3.8/site-packages"
+            - "/usr/local/lib/python3.9/site-packages"
       - run:
           name: Lint code
           command: |
