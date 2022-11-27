@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/Jxtopher/binpacking.svg?style=svg&circle-token=70de38360fc5aa8e02f50443a377512bec444ce1)](https://app.circleci.com/pipelines/github/Jxtopher/binpacking/)
 [![Build](https://github.com/Jxtopher/binpacking/actions/workflows/build.yaml/badge.svg)](https://github.com/Jxtopher/binpacking/actions/workflows/build.yaml)
 -------------------------------------
 # Bin Packing 2D 
