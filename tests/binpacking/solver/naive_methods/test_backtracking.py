@@ -7,8 +7,8 @@ from binpacking.solver.statistics import (
 )
 from binpacking.solver.stop_criteria import StopCriteria, CriterionBudget
 from binpacking.solver.bin_packing_2d import BinPacking2D, Rectangle
-from binpacking.solver.solution import Solution, Coordinate
-from binpacking.solver.naive_methods.backtracking import Backtracking
+from binpacking.solver.data_structure.solution import Solution, Coordinate
+from binpacking.solver.optimisation.naive_methods.backtracking import Backtracking
 
 
 class BacktrackingTest(BaseTestCase):
@@ -44,7 +44,10 @@ class BacktrackingTest(BaseTestCase):
         backtracking.run(sol)
 
     def test_run_small_instance(self) -> None:
-        instance = BinPacking2D(Rectangle(2, 2), [Rectangle(1, 2), Rectangle(1, 2)],)
+        instance = BinPacking2D(
+            Rectangle(2, 2),
+            [Rectangle(1, 2), Rectangle(1, 2)],
+        )
         sol = Solution(instance.get_instance_size())
         sol[0] = Coordinate(-1, -1)
         sol[1] = Coordinate(-1, -1)

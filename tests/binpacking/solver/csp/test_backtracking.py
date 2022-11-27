@@ -9,7 +9,8 @@ from binpacking.solver.data_structure.domains import Domains
 class BacktrackingTest(BaseTestCase):
     def test_backtracking(self) -> None:
         instance = BinPacking2D(
-            Rectangle(2, 2), [Rectangle(2, 1), Rectangle(1, 1), Rectangle(1, 1)],
+            Rectangle(2, 2),
+            [Rectangle(2, 1), Rectangle(1, 1), Rectangle(1, 1)],
         )
 
         domains = Domains(instance)
@@ -41,7 +42,8 @@ class BacktrackingTest(BaseTestCase):
 
     def test_backtracking_with_stack(self) -> None:
         instance = BinPacking2D(
-            Rectangle(2, 2), [Rectangle(2, 1), Rectangle(1, 1), Rectangle(1, 1)],
+            Rectangle(2, 2),
+            [Rectangle(2, 1), Rectangle(1, 1), Rectangle(1, 1)],
         )
 
         domains = Domains(instance)
